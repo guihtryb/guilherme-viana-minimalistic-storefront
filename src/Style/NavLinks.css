@@ -1,0 +1,7 @@
+.navlinks-container {
+  border: 2px solid brown;
+  display: flex;
+  padding: 5px;
+  justify-content: space-between;
+  width: 100px;
+}

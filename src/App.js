@@ -6,11 +6,14 @@ import Home from './Pages/Home';
 import NotFound from './Pages/NotFound';
 
 import './App.css';
+import { ApolloProvider } from 'react-apollo';
+import apolloClient from './Services/apollo';
 
 class App extends Component {
   render() {
     return (
       <BrowserRouter>
+      <ApolloProvider client={apolloClient}>
       <div className='app'>
         <Switch>
           <Route exact path="/" component={ Home }/>
@@ -19,6 +22,7 @@ class App extends Component {
           <Route component={ NotFound }/>
         </Switch>
       </div>
+      </ApolloProvider>
       </BrowserRouter>
     );
   }
