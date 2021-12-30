@@ -1,0 +1,38 @@
+.product-card {
+  align-items: center;
+  justify-content: space-evenly;
+  display: flex;
+  flex-direction: column;
+  height: 444px;
+  width: 386px;
+  border: 2px solid green;
+  margin-bottom: 100px;
+}
+
+.product-image {
+  height: 338px;
+  width: 356px;
+  border: 2px solid blue;
+}
+
+.product-infos {
+  display: flex;
+  flex-direction: column;
+  width: 354px;
+  font-family: 'Raleway', sans-serif;
+  color: #1D1F22;
+  height: 58px;
+  font-size: 18px;
+  font-style: normal;
+  line-height: 28.8px;
+}
+
+.product-name {
+  font-family: Raleway;
+  font-weight: 300;
+}
+
+.product-price {
+  font-weight: 800;
+  font-style: normal;
+}
