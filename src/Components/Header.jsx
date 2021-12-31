@@ -12,11 +12,11 @@ export default class Header extends Component {
       <header className="header-container">
         <NavLinks />
         <StoreLogo />
-        <div className="header-actions">
-          <CurrencySwitcher />
-          <CartOverlay />
-        </div>
+          <div className="header-actions">
+            <CurrencySwitcher />
+            <CartOverlay />
+          </div>
       </header>
-    )
+    );
   }
 }

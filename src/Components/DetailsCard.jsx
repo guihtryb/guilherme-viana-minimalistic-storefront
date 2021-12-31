@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
 export default class DetailsCard extends Component {
   render() {
@@ -6,6 +6,6 @@ export default class DetailsCard extends Component {
       <div>
         DetailsCard
       </div>
-    )
+    );
   }
 }

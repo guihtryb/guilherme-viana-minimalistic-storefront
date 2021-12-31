@@ -1,7 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+
+
 .navlinks-container {
-  border: 2px solid brown;
   display: flex;
-  padding: 5px;
-  justify-content: space-between;
-  width: 100px;
+  align-self: stretch;
+  justify-content: space-around;
+}
+
+.navlink-span {
+  display: flex;
+  flex-direction: column;
+  font-family: "Raleway";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 19px;
+  letter-spacing: 0px;
+  padding: 0 16px;
+  text-align: center;
+}
+
+.navlink-span:hover {
+  border-bottom: 2px solid #5ECE7B;
+  color: #5ECE7B;
+  cursor: pointer;
 }
