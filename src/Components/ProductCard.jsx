@@ -8,8 +8,8 @@ export default class ProductCard extends Component {
       <div className="product-card">
         <div className="product-image"/>
           <div className="product-infos">
-          <span className="product-name"> product name </span>
-          <span className="product-price"> product price </span>
+          <span className="product-name"> Xbox 360 </span>
+          <span className="product-price"> $50.60 </span>
         </div>
       </div>
     )
