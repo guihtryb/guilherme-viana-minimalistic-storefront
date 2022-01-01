@@ -10,7 +10,7 @@ class Products extends Component {
   render() {
     const { products, category } = this.props;
     const currentProducts = products.categories.filter((currCategory) => currCategory.name === category);
-    console.log(currentProducts, products);
+    
     return (
       <section className="products-section">
         <div className="products-container">

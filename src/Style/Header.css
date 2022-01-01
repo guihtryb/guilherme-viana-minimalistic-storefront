@@ -34,7 +34,24 @@
   width: 6px;
   left: 156px;
   top: 21.5px;
-  border-radius: 0px;
+}
+
+.currency-options {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  width: 114px;
+  padding: 10px;
+  top: 65px;
+  background-color: #FFF;
+  box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
+}
+.option {
+  margin: 20px;
+}
+
+.option:hover {
+  cursor: pointer;
 }
 
 .cart-overlay-container {

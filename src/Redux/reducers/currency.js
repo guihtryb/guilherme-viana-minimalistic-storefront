@@ -3,11 +3,12 @@ const INITIAL_STATE = {
 };
 
 function currencyReducer(state = INITIAL_STATE, action) {
-  switch (action.type) {
+  const { type, currency } = action;
+  switch (type) {
   case 'SWITCH_CURRENCY':
     return { 
       ...state,
-      currency: action.currency,
+      currency,
     };
   default:
     return state;
