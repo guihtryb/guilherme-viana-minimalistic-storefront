@@ -5,14 +5,18 @@
   flex-direction: column;
   height: 444px;
   width: 386px;
-  border: 2px solid green;
   margin-bottom: 100px;
+  cursor: pointer;
+  transition: all ease 0.5s;
+}
+
+.product-card:hover {
+  box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
 }
 
 .product-image {
   height: 338px;
   width: 356px;
-  border: 2px solid blue;
 }
 
 .product-infos {

@@ -1,5 +1,5 @@
 const INITIAL_STATE = {
-  category: "Tech",
+  category: "tech",
 };
 
 function categoryReducer(state = INITIAL_STATE, action) {

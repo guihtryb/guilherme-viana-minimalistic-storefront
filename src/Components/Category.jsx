@@ -4,11 +4,14 @@ import { connect } from 'react-redux';
 
 class Category extends Component {
   render() {
-    const { category } = this.props
+    const { category } = this.props;
+
+    const categoryName = category[0].toUpperCase() + category.substr(1, category.length - 1);
+    console.log(categoryName);
     return (
       <section className="category-section">
         <div className="category-container">
-          { category }
+          { categoryName }
         </div>
       </section>
     );
