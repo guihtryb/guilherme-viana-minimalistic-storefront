@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import switchCurrency from '../Redux/actions/index';
+import { switchCurrency } from '../Redux/actions/index';
 
 class CurrencySwitcher extends Component {
   constructor() {
