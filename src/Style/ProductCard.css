@@ -6,8 +6,8 @@
   height: 444px;
   width: 386px;
   margin-bottom: 100px;
-  cursor: pointer;
   transition: all ease 0.3s;
+  padding-bottom: 15px;
 }
 
 .product-card:hover {
@@ -17,6 +17,62 @@
 .product-image {
   height: 338px;
   width: 356px;
+}
+
+.btn-add-to-cart {
+  border: none;
+  background: #5ECE7B;
+  height: 48px;
+  width: 48px;
+  border-radius: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  position: relative;
+  left: 130px;
+  float: left;
+  cursor: pointer;
+  transition: all ease 0.1s;
+}
+
+.out-of-stock {
+  opacity: 0.5;
+}
+
+.out-of-stock-span {
+  font-family: Raleway;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 38px;
+  letter-spacing: 0px;
+  text-align: left;
+  position: absolute;
+  left: 25.42%;
+  right: 25.71%;
+  top: 44.24%;
+  bottom: 43.94%;
+}
+
+.image-container {
+  position: relative;
+}
+
+.btn-add-to-cart:hover {
+  box-shadow: 0px 4px 15px rgba(108, 102, 106, 0.79);
+}
+
+.upper {
+  width: 24px;
+}
+
+.wheel {
+  width: 8px;
+}
+
+.on-card path{
+  fill: #FFF;
 }
 
 .product-infos {
