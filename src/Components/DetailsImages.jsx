@@ -6,13 +6,12 @@ export default class DetailsImages extends Component {
     console.log(product);
     return (
       <section className="details-images-section">
-        <div className="details-min-img">
-          <img src="" alt="" />
-          <img src="" alt="" />
-          <img src="" alt="" />
+        <div className="details-min-images">
+          <img className="details-min-img" src="" alt="" />
+          <img className="details-min-img" src="" alt="" />
+          <img className="details-min-img" src="" alt="" />
         </div>
-        <div className="details-lar-img"></div>
-        DetailsImages
+        <img className="details-lar-img" src="" alt=""/>
       </section>
     )
   }
