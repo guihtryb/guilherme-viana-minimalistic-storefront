@@ -40,7 +40,6 @@ class Details extends Component {
     });
   }
 
-  // DetailsInfos - price
   // DetailsImage - change main image and zoom in when mouse over
   // Details final style
 
@@ -69,7 +68,7 @@ query {
       id
       inStock
       gallery
-      # description
+      description
       prices {
         currency
         amount

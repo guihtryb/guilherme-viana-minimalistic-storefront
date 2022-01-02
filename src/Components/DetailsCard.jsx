@@ -18,6 +18,10 @@ class DetailsCard extends Component {
     const currencySymbol = changes[currentCurrency.currency];
     console.log(currentCurrency);
     const productItem = product[0];
+    const htmlStr = productItem.description;
+    const parser = new DOMParser();
+    
+    const productDescrip = parser.parseFromString(htmlStr, "text/html").body.textContent || "";
 
     return (
       <section className="details-info-section">
@@ -33,8 +37,9 @@ class DetailsCard extends Component {
           <button className="details-btn-add-to-cart">
             ADD TO CART
           </button>
-          <p className="product-description">
-          </p>
+          <div>
+          { productDescrip }
+          </div>
         </div>
       </section>
     );

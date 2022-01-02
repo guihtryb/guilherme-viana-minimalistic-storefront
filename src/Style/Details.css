@@ -47,8 +47,7 @@
 }
 
 .details-lar-img {
-  height: 511px;
-  width: 610px;
+  height: 511px !important;
   margin-right: 100px;
 }
 
