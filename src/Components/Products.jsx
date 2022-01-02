@@ -10,14 +10,14 @@ class Products extends Component {
   render() {
     const { products, category } = this.props;
     const currentProducts = products.categories.filter((currCategory) => currCategory.name === category);
-    
+
     return (
       <section className="products-section">
         <div className="products-container">
           {
             currentProducts.map((item) => (
               item.products.map((product) => (
-                <ProductCard product={product}/>
+                <ProductCard product={ product }/>
               ))
             ))
           }

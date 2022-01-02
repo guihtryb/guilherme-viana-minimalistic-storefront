@@ -2,6 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  margin: 20px 0;
 }
 
 .details-images-section {
@@ -17,7 +18,7 @@
   display: flex;
   align-items: center;
   border: 2px solid seagreen;
-  width: 38vw;
+  width: 35vw;
 }
 
 .details-infos {
@@ -31,7 +32,8 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 320px;
+  /* height: 320px; */
+  gap: 30px;
   border: 2px solid saddlebrown;
   margin-top: 17.5px;
   margin-left: 100px;
@@ -46,6 +48,7 @@
 .details-lar-img {
   height: 511px;
   width: 610px;
+  margin-right: 100px;
 }
 
 .details-btn-add-to-cart {
@@ -53,4 +56,8 @@
   border: none;
   height: 52px;
   width: 292px;
+}
+
+.product-description {
+  max-width: 220px;
 }

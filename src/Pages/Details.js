@@ -23,6 +23,12 @@ class Details extends Component {
     this.getProduct();
   }
 
+  componentWillUnmount() {
+    this.setState({
+      product: [],
+    })
+  }
+
   getProduct() {
     const { products, category } = this.props;
     const { match: { params: {id} } } = this.props;
@@ -58,6 +64,7 @@ query {
       id
       inStock
       gallery
+      # description
       prices {
         currency
         amount
