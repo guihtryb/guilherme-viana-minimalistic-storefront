@@ -1,0 +1,18 @@
+.details-page {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.details-images-section {
+  border: 2px solid green;
+  display: flex;
+  height: 86.7vh;
+  width: 60.69vw;
+}
+
+.details-info-section {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid seagreen;
+  width: 38.7vw;
+}

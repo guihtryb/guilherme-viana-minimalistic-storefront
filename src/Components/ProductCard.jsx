@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import '../Style/ProductCard.css'
 
 
@@ -33,6 +34,7 @@ class ProductCard extends Component {
     };
     const currencySymbol = changes[currentCurrency.currency];
     return (
+      <Link to={`/details/${product.id}`}>
       <div className={ product.inStock ? "product-card" : "product-card out-of-stock"} key={product.name} onMouseOver={ this.showAddToCartButton } onMouseLeave={ this.hideAddToCartButton }>
         <div className="image-container">
         <img className="product-image" src={product.gallery[0]} alt="product"/>
@@ -64,6 +66,7 @@ class ProductCard extends Component {
           <span className="product-price"> { `${currencySymbol}${currentCurrency.amount}` } </span>
         </div>
       </div>
+      </Link>
     )
   }
 }

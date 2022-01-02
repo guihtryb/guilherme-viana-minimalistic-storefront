@@ -19,7 +19,7 @@ class App extends Component {
             <Switch>
               <Route exact path="/" component={ Home }/>
               <Route exact path="/cart" component={ Cart }/>
-              <Route exact path="/details/:id" render={ (props) => <Details {...props} /> } />
+              <Route exact path="/details/:id" render={(props) => <Details {...props} /> }/>
               <Route component={ NotFound }/>
             </Switch>
           </div>

@@ -33,6 +33,7 @@ query {
 	  name
     products {
 	    name
+      id
       inStock
       gallery
       prices {

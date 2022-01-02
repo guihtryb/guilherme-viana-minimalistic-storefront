@@ -7,7 +7,6 @@ class Category extends Component {
     const { category } = this.props;
 
     const categoryName = category[0].toUpperCase() + category.substr(1, category.length - 1);
-    console.log(categoryName);
     return (
       <section className="category-section">
         <div className="category-container">
