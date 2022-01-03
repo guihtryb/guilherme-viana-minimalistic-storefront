@@ -40,7 +40,6 @@ class Details extends Component {
     });
   }
 
-  // DetailsImage - change main image and zoom in when mouse over
   // Details final style
 
 
@@ -72,6 +71,12 @@ query {
       prices {
         currency
         amount
+      }
+      attributes {
+        name
+        items {
+          value
+        }
       }
     }
   }

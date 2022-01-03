@@ -6,7 +6,6 @@ class DetailsCard extends Component {
     const { product, currency } = this.props;
 
     if (!product.length) return null;
-    console.log(product);
     const currentCurrency = product[0].prices.find((price) => price.currency === currency);
     const changes = {
       USD: "$",
@@ -15,29 +14,57 @@ class DetailsCard extends Component {
       JPY: "¥",
       RUB: "₽",
     };
-    const currencySymbol = changes[currentCurrency.currency];
-    console.log(currentCurrency);
     const productItem = product[0];
+
+    const productsAttributes = productItem.attributes;
+    console.log(productsAttributes);
+    const currencySymbol = changes[currentCurrency.currency];
     const htmlStr = productItem.description;
     const parser = new DOMParser();
     
     const productDescrip = parser.parseFromString(htmlStr, "text/html").body.textContent || "";
 
     return (
-      <section className="details-info-section">
+      <section>
         <div className="details-infos">
-          <h3 className="product-title">
+          <span className="product-title">
             { productItem.name }
-          </h3>
-          <div className="product-attributes"></div>
+          </span>
+          <div className="product-attributes">
+            {
+              productsAttributes.map((attribute) => (
+              <div className="attribute-container" key={attribute.name}>
+                <h2 className="attribute-name">
+                  { attribute.name }:
+                </h2>
+                <div className="attribute-options">
+                  {
+                    attribute.items.map((item) => {
+                      if (attribute.name === "Color") {
+                        return (
+                        <div className="attribute-option-color" style={ { backgroundColor: item.value } } key={item.value}></div>
+                        );
+                      }
+                      return (
+                        <div className="attribute-option">
+                            <span>{item.value}</span>
+                        </div>
+                      );
+                    })
+                  }
+                </div>
+              </div>
+              ))
+            }
+          </div>
           <div className="product-price">
-            <h2>PRICE:</h2>
-            <span>{ `${currencySymbol}${currentCurrency.amount}` }</span>
+            <h2 className="details-price-atr">PRICE:</h2>
+            <span className="details-price">{ `${currencySymbol}${currentCurrency.amount}` }</span>
           </div>
           <button className="details-btn-add-to-cart">
             ADD TO CART
           </button>
-          <div>
+          <div className="product-description">
           { productDescrip }
           </div>
         </div>

@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import ReactImageMagnify from 'react-image-magnify';
-import Zoom from 'react-img-zoom';
-import InnerImageZoom from 'react-inner-image-zoom';
 
 
 export default class DetailsImages extends Component {
@@ -23,7 +21,6 @@ export default class DetailsImages extends Component {
   render() {
     const { product } = this.props;
     const { imageIndex } = this.state;
-    console.log(imageIndex);
     if (!product.length) return <h2>Loading...</h2>;
 
     const productItem = product[0];
@@ -37,13 +34,6 @@ export default class DetailsImages extends Component {
             )
           }
         </div>
-          {/* <Zoom
-            img={ productItem.gallery[0] }
-            zoomScale={1.5}
-            width={610}
-            height={500}
-            transitionTime={0.3}
-          /> */}
           <ReactImageMagnify {...{
             imageClassName: "details-lar-img",
             smallImage: {
@@ -57,7 +47,6 @@ export default class DetailsImages extends Component {
               height: 700
             }
           }} />
-          {/* <img src={ productItem.gallery[imageIndex] } alt="" className="details-lar-img"/> */}
       </section>
     )
   }
