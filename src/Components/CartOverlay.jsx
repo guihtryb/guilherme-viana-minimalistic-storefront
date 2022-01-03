@@ -33,6 +33,7 @@ class CartOverlay extends Component {
 
     return (
       <div className="cart-items">
+        <h3>My Bag</h3><span>{items.length} { items.length > 1 ? "items" : "item"}</span>
         {
           items.map((item, index) => (
             <div className="cart-item" key={index}>
@@ -47,6 +48,10 @@ class CartOverlay extends Component {
             </div>
           ))
         }
+        <div className="btn-container">
+          <button className="view-bag-btn">VIEW BAG</button>
+          <button className="checkout-btn"> CHECKOUT</button>
+        </div>
       </div>
     )
   }

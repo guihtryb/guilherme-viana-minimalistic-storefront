@@ -10,47 +10,21 @@ import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 
 class Details extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      product: [],
-    }
-
-    this.getProduct = this.getProduct.bind(this);
-  }
-
-  componentDidMount() {
-    this.getProduct();
-  }
-
-  componentWillUnmount() {
-    this.setState({
-      product: [],
-    })
-  }
-
-  getProduct() {
+  render() {
     const { products, category } = this.props;
     const { match: { params: {id} } } = this.props;
+
+    if (!products.categories) return <h3>Loading...</h3>
+
     const filterCategory = products.categories.filter((product) => product.name === category);
-    const currProduct = filterCategory[0].products.find((product) => product.id === id);
+    const currProduct = [filterCategory[0].products.find((product) => product.id === id)];
 
-    this.setState({
-      product: [currProduct],
-    });
-  }
-
-  // Details final style
-
-
-  render() {
-    const { product } = this.state;
     return (
       <>
       <Header />
       <main className="details-page">
-        <DetailsImages product={ product }/>
-        <DetailsCard product={ product }/>
+        <DetailsImages product={ currProduct }/>
+        <DetailsCard product={ currProduct }/>
       </main>
       </>
     )
