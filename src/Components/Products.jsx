@@ -9,6 +9,8 @@ import { connect } from 'react-redux';
 class Products extends Component {
   render() {
     const { products, category } = this.props;
+    
+    if (!products.categories) return <h3>Loading...</h3>;
     const currentProducts = products.categories.filter((currCategory) => currCategory.name === category);
 
     return (

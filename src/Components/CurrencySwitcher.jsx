@@ -23,7 +23,6 @@ class CurrencySwitcher extends Component {
 
     const value = e.target.innerText.split(" ");
     const newCurrency = value[1];
-    //Escrever nova currency
     switchCurrencyAction(newCurrency);
   }
 
@@ -49,9 +48,9 @@ class CurrencySwitcher extends Component {
 
   render() {
     return (
-      <div className="currency-switcher-container">
+      <div className="currency-switcher-container" onClick={this.showHideSwitcher}>
         <span>$</span>
-        <svg width="8" height="4" viewBox="0 0 8 4" fill="none" xmlns="http://www.w3.org/2000/svg" className="currency-switcher" onClick={this.showHideSwitcher}>
+        <svg width="8" height="4" viewBox="0 0 8 4" fill="none" xmlns="http://www.w3.org/2000/svg" className="currency-switcher">
           <path d="M1 0.5L4 3.5L7 0.5" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
         {this.state.showCurrencies ? this.renderCurrencySwitcher() : null}

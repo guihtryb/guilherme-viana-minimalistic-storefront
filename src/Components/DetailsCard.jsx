@@ -17,7 +17,7 @@ class DetailsCard extends Component {
     const productItem = product[0];
 
     const productsAttributes = productItem.attributes;
-    console.log(productsAttributes);
+    console.log(productItem);
     const currencySymbol = changes[currentCurrency.currency];
     const htmlStr = productItem.description;
     const parser = new DOMParser();
@@ -47,7 +47,7 @@ class DetailsCard extends Component {
                       }
                       return (
                         <div className="attribute-option">
-                            <span>{item.value}</span>
+                            <span>{ item.value }</span>
                         </div>
                       );
                     })
@@ -61,7 +61,7 @@ class DetailsCard extends Component {
             <h2 className="details-price-atr">PRICE:</h2>
             <span className="details-price">{ `${currencySymbol}${currentCurrency.amount}` }</span>
           </div>
-          <button className="details-btn-add-to-cart">
+          <button className="details-btn-add-to-cart"  disabled={ productItem.inStock ? false : true } onClick={() => console.log("clicked")}>
             ADD TO CART
           </button>
           <div className="product-description">

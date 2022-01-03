@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { addItem } from '../Redux/actions';
 import '../Style/ProductCard.css'
 
 
@@ -9,17 +10,29 @@ class ProductCard extends Component {
     super();
     this.state = {
       showButton: false,
-    }
+    };
+
     this.showAddToCartButton = this.showAddToCartButton.bind(this);
     this.hideAddToCartButton = this.hideAddToCartButton.bind(this);
+    this.addItemToCart = this.addItemToCart.bind(this);
   }
 
   showAddToCartButton() {
-    this.setState({ showButton: true});
+    this.setState({ showButton: true });
   }
 
   hideAddToCartButton() {
-    this.setState({ showButton: false});
+    this.setState({ showButton: false });
+  }
+
+  addItemToCart(name, prices, pic) {
+    const { addItemToCartAction } = this.props;
+    const toCart = {
+      name,
+      prices,
+      pic
+    };
+    addItemToCartAction(toCart);
   }
 
   render() {
@@ -34,13 +47,14 @@ class ProductCard extends Component {
     };
     const currencySymbol = changes[currentCurrency.currency];
     return (
-      <Link to={`/details/${product.id}`}>
       <div className={ product.inStock ? "product-card" : "product-card out-of-stock"} key={product.name} onMouseOver={ this.showAddToCartButton } onMouseLeave={ this.hideAddToCartButton }>
+        <Link to={`/details/${product.id}`}>
         <div className="image-container">
         <img className="product-image" src={product.gallery[0]} alt="product"/>
         { !product.inStock ? <span className="out-of-stock-span"> OUT OF STOCK </span> : null}
         </div>
-          <button onClick={console.log("click")} className="btn-add-to-cart" style={ this.state.showButton ? {visibility: 'visible'} : {visibility: 'hidden'}}>
+        </Link>
+          <button onClick={() => this.addItemToCart(product.name, product.prices, product.gallery[0])} className="btn-add-to-cart" style={ this.state.showButton ? {visibility: 'visible'} : {visibility: 'hidden'}} disabled={product.inStock ? false : true}>
           <div className="cart-overlay-container">
         <div className="cart-upper">
           <svg className="on-card upper" width="20" height="24" viewBox="0 0 20 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -66,7 +80,6 @@ class ProductCard extends Component {
           <span className="product-price"> { `${currencySymbol}${currentCurrency.amount}` } </span>
         </div>
       </div>
-      </Link>
     )
   }
 }
@@ -75,4 +88,8 @@ const mapStateToProps = (state) => ({
   currency: state.currencyReducer.currency,
 });
 
-export default connect(mapStateToProps, null)(ProductCard);
+const mapDispatchToProps = (dispatch) => ({
+  addItemToCartAction: (item) => dispatch(addItem(item)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductCard);
