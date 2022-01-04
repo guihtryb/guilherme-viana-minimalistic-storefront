@@ -19,6 +19,7 @@ class CartOverlay extends Component {
 
   renderCartItems() {
     const { items, currency } = this.props;
+
     const currentCurrency = (item) => item.prices.find((price) => price.currency === currency);
     const changes = {
       USD: "$",
@@ -39,8 +40,10 @@ class CartOverlay extends Component {
       });
     });
 
-    const totalPrice = itemPrices.reduce((a, b) => a.total + b.total).toFixed(2);
-
+    const precision = 100;
+    const productPrice =  itemPrices.length ? itemPrices[0].total : 0;
+    const totalPrice = itemPrices.length >= 2 ? itemPrices.reduce(((a, b) => a + b.total), 0) * precision / precision : productPrice;
+    console.log(itemPrices, totalPrice);
     return (
       <div className="cart-items">
         <h3 className="my-bag">My Bag, <span className="bag-items-quanty">{items.length} { items.length > 1 ? "items" : "item"}</span></h3>
@@ -74,7 +77,7 @@ class CartOverlay extends Component {
         }
         <div className="total-price-container">
           <span className="total-price-txt">Total</span>
-          <span className="total-price-value">{`${changes[currency]}${totalPrice}`}</span>
+          <span className="total-price-value">{changes[currency]} {totalPrice}</span>
         </div>
         <div className="btn-container">
           <Link to="/cart">

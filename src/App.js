@@ -9,6 +9,12 @@ import './App.css';
 import { ApolloProvider} from 'react-apollo';
 import apolloClient from './Services/apollo';
 
+// overlay total price bug -> open null
+
+// cart page
+// add and remove functions
+
+
 
 class App extends Component {
   render() {
