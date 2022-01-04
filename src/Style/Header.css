@@ -59,7 +59,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  cursor: pointer;
   height: 20px;
   width: 20px;
 }
@@ -94,7 +93,6 @@
 
 .cart-item {
   display: flex;
-  border: 2px solid #1D1F22;
   justify-content: space-between;
   margin-bottom: 40px;
 }
@@ -105,6 +103,7 @@
   line-height: 25px;
   color: #1D1F22;
   margin-top: 6px;
+  margin-bottom: 25px;
 }
 
 .bag-items-quanty {
@@ -128,11 +127,14 @@
 }
 
 .cart-item-price {
-  font-family: Raleway;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 160%;
   margin-left: 16px;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 26px;
+  letter-spacing: 0em;
+  text-align: right;
+  font-family: Raleway;
 }
 
 .btn-container {
@@ -177,5 +179,47 @@
 }
 
 .cart-item-quanty {
-  align-self: center;
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.item-quanty-control-btn {
+  align-items: center;
+  box-sizing: border-box;
+  border: 1px solid #1D1F22;
+  cursor: pointer;
+  display: flex;
+  height: 24px;
+  justify-content: center;
+  width: 24px;
+}
+
+.total-price-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  width: 289px;
+}
+
+.total-price-txt {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 18px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.total-price-value {
+  font-family: Raleway;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: 0em;
+  line-height: 26px;
+  text-align: right;
+
 }

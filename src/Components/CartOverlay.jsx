@@ -27,7 +27,19 @@ class CartOverlay extends Component {
       JPY: "¥",
       RUB: "₽",
     };
+
     const currencySymbol = (item) => changes[currentCurrency(item).currency];
+
+    const itemPrices = items.map((item) => {
+      const price = item.prices.find((price) => price.currency === currency);
+      const quanty = item.quanty;
+      const total = price.amount * quanty;
+      return ({
+        total
+      });
+    });
+
+    const totalPrice = itemPrices.reduce((a, b) => a.total + b.total).toFixed(2);
 
     return (
       <div className="cart-items">
@@ -46,23 +58,29 @@ class CartOverlay extends Component {
                 </span>
               </div>
               <div className="cart-item-quanty">
+                <div className="item-quanty-control-btn">
+                  +
+                </div>
                 <span>
                   {item.quanty}
                 </span>
+                <div className="item-quanty-control-btn">
+                  -
+                </div>
               </div>
               <img src={item.pic} alt="cart item" className="cart-item-image" />
             </div>
           ))
         }
-        <div className="cart-overlay-total-price">
-          <span>Total</span>
-          <span>Price</span>
+        <div className="total-price-container">
+          <span className="total-price-txt">Total</span>
+          <span className="total-price-value">{`${changes[currency]}${totalPrice}`}</span>
         </div>
         <div className="btn-container">
           <Link to="/cart">
             <button className="view-bag-btn">VIEW BAG</button>
           </Link>
-          <button className="checkout-btn"> CHECKOUT</button>
+          <button className="checkout-btn">CHECKOUT</button>
         </div>
       </div>
     )

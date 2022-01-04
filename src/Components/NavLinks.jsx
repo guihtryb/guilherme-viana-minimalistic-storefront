@@ -22,7 +22,7 @@ class NavLinks extends Component {
 
   render() {
     const { categories } = this.props;
-    
+
     if (!categories.categories) return null;
     
     const storeCategories = categories.categories;
