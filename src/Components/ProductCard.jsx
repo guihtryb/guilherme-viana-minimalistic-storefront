@@ -25,18 +25,29 @@ class ProductCard extends Component {
     this.setState({ showButton: false });
   }
 
-  addItemToCart(name, prices, pic) {
-    const { addItemToCartAction } = this.props;
+  addItemToCart(name, prices, pic, quanty = 1) {
+    const { addItemToCartAction, items } = this.props;
     const toCart = {
       name,
       prices,
-      pic
+      pic,
+      quanty
     };
-    addItemToCartAction(toCart);
+
+    if (items.length === 0){
+      return addItemToCartAction(toCart)
+      };
+
+    const notNewItem = items.find((item) => item.name === toCart.name);
+    if (notNewItem) {
+      ++notNewItem.quanty;
+    } else {
+      addItemToCartAction(toCart);
+    }
   }
 
   render() {
-    const { product, currency } = this.props;
+    const { product, currency, category } = this.props;
     const currentCurrency = product.prices.find((price) => price.currency === currency);
     const changes = {
       USD: "$",
@@ -48,7 +59,7 @@ class ProductCard extends Component {
     const currencySymbol = changes[currentCurrency.currency];
     return (
       <div className={ product.inStock ? "product-card" : "product-card out-of-stock"} key={product.name} onMouseOver={ this.showAddToCartButton } onMouseLeave={ this.hideAddToCartButton }>
-        <Link to={`/details/${product.id}`}>
+        <Link to={`/details/${category}/${product.id}`}>
         <div className="image-container">
         <img className="product-image" src={product.gallery[0]} alt="product"/>
         { !product.inStock ? <span className="out-of-stock-span"> OUT OF STOCK </span> : null}
@@ -86,6 +97,7 @@ class ProductCard extends Component {
 
 const mapStateToProps = (state) => ({
   currency: state.currencyReducer.currency,
+  items: state.cartItemsReducer.items,
 });
 
 const mapDispatchToProps = (dispatch) => ({

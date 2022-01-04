@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 class CartOverlay extends Component {
   constructor(props) {
@@ -26,30 +27,41 @@ class CartOverlay extends Component {
       JPY: "¥",
       RUB: "₽",
     };
-
     const currencySymbol = (item) => changes[currentCurrency(item).currency];
-
-    console.log(items);
 
     return (
       <div className="cart-items">
-        <h3>My Bag</h3><span>{items.length} { items.length > 1 ? "items" : "item"}</span>
+        <h3 className="my-bag">My Bag, <span className="bag-items-quanty">{items.length} { items.length > 1 ? "items" : "item"}</span></h3>
         {
           items.map((item, index) => (
             <div className="cart-item" key={index}>
-              <span className="cart-item-name">
-                { item.name }
-              </span>
-              <span className="cart-item-price">
-                { console.log(currentCurrency(item)) }
-                {`${currencySymbol(item)} ${currentCurrency(item).amount}`}
-              </span>
-              <img width={105} height={137} src={item.pic} alt="" />
+              <div className="cart-item-name-and-price">
+                <div className="cart-item-name-container">
+                  <span className="cart-item-name">
+                    { item.name }
+                  </span>
+                </div>
+                <span className="cart-item-price">
+                  {`${currencySymbol(item)}${currentCurrency(item).amount}`}
+                </span>
+              </div>
+              <div className="cart-item-quanty">
+                <span>
+                  {item.quanty}
+                </span>
+              </div>
+              <img src={item.pic} alt="cart item" className="cart-item-image" />
             </div>
           ))
         }
+        <div className="cart-overlay-total-price">
+          <span>Total</span>
+          <span>Price</span>
+        </div>
         <div className="btn-container">
-          <button className="view-bag-btn">VIEW BAG</button>
+          <Link to="/cart">
+            <button className="view-bag-btn">VIEW BAG</button>
+          </Link>
           <button className="checkout-btn"> CHECKOUT</button>
         </div>
       </div>
@@ -78,7 +90,7 @@ class CartOverlay extends Component {
             </svg>
             </div>
           </div>
-            { showCart ? this.renderCartItems() : null }
+            { (showCart) ? this.renderCartItems() : null }
         </div>
     );
   }

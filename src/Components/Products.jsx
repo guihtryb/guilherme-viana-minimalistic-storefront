@@ -18,8 +18,8 @@ class Products extends Component {
         <div className="products-container">
           {
             currentProducts.map((item) => (
-              item.products.map((product) => (
-                <ProductCard product={ product }/>
+              item.products.map((product, index) => (
+                <ProductCard product={ product } key={index} category={ category }/>
               ))
             ))
           }

@@ -9,16 +9,25 @@ class DetailsCard extends Component {
     this.addItemToCart = this.addItemToCart.bind(this);
   }
 
-  addItemToCart(name, prices, pic) {
-    const { addItemToCartAction } = this.props;
-
+  addItemToCart(name, prices, pic, quanty = 1) {
+    const { addItemToCartAction, items } = this.props;
     const toCart = {
       name,
       prices,
       pic,
-    }
+      quanty
+    };
 
-    addItemToCartAction(toCart);
+    if (items.length === 0){
+      return addItemToCartAction(toCart)
+      };
+
+    const notNewItem = items.find((item) => item.name === toCart.name);
+    if (notNewItem) {
+      ++notNewItem.quanty;
+    } else {
+      addItemToCartAction(toCart);
+    }
   }
 
   render() {
@@ -52,21 +61,21 @@ class DetailsCard extends Component {
           </span>
           <div className="product-attributes">
             {
-              productsAttributes.map((attribute) => (
-              <div className="attribute-container" key={attribute.name}>
+              productsAttributes.map((attribute, index) => (
+              <div className="attribute-container" key={index}>
                 <h2 className="attribute-name">
                   { attribute.name }:
                 </h2>
                 <div className="attribute-options">
                   {
-                    attribute.items.map((item) => {
+                    attribute.items.map((item, index) => {
                       if (attribute.name === "Color") {
                         return (
-                        <div className="attribute-option-color" style={ { backgroundColor: item.value } } key={item.value}></div>
+                        <div className="attribute-option-color" style={ { backgroundColor: item.value } } key={index}></div>
                         );
                       }
                       return (
-                        <div className="attribute-option">
+                        <div className="attribute-option" key={index}>
                             <span>{ item.value }</span>
                         </div>
                       );
@@ -95,6 +104,7 @@ class DetailsCard extends Component {
 
 const mapStateToProps = (state) => ({
   currency: state.currencyReducer.currency,
+  items: state.cartItemsReducer.items,
 });
 
 const mapDispatchToProps = (dispatch) => ({

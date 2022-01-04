@@ -30,7 +30,7 @@ export default class DetailsImages extends Component {
         <div className="details-min-images">
           {
             productItem.gallery && productItem.gallery.map((image, index) =>
-              <img className="details-min-img" src={ image } alt="product.png" onClick={ () => this.imageToZoom(index)} />
+              <img className="details-min-img" src={ image } alt="product.png" onClick={ () => this.imageToZoom(index)} key={index} />
             )
           }
         </div>

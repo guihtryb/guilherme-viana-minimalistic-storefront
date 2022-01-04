@@ -15,7 +15,6 @@ class NavLinks extends Component {
   handleClick({target}) {
     const { switchCategoryAction } = this.props;
 
-    
     const { innerText } = target;
     const newCategory = innerText.toLowerCase();
     switchCategoryAction(newCategory);
