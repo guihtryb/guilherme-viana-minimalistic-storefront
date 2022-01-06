@@ -76,7 +76,7 @@ class DetailsCard extends Component {
     const productDescrip = parser.parseFromString(htmlStr, "text/html").body.textContent || "";
 
     return (
-      <section>
+      <aside>
         <div className="details-infos">
           <span className="product-title">
             { productItem.name }
@@ -121,7 +121,7 @@ class DetailsCard extends Component {
           { productDescrip }
           </div>
         </div>
-      </section>
+      </aside>
     );
   }
 }
