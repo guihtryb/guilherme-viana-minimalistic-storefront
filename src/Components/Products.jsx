@@ -38,6 +38,12 @@ query {
       id
       inStock
       gallery
+      attributes {
+        name
+        items {
+          value
+        }
+      }
       prices {
         currency
         amount

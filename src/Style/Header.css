@@ -202,6 +202,7 @@
 
 .item-quanty-control-btn {
   align-items: center;
+  background-color: #FFF;
   box-sizing: border-box;
   border: 1px solid #1D1F22;
   cursor: pointer;

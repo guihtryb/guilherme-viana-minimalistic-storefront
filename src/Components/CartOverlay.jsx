@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { addItem, removeItem } from '../Redux/actions';
 
 class CartOverlay extends Component {
   constructor(props) {
@@ -9,6 +10,8 @@ class CartOverlay extends Component {
       showCart: false,
     };
 
+    this.increaseQuanty = this.increaseQuanty.bind(this);
+    this.decreaseQuanty = this.decreaseQuanty.bind(this);
     this.showHideCart = this.showHideCart.bind(this);
     this.renderCartItems = this.renderCartItems.bind(this);
     this.attributeStyle = this.attributeStyle.bind(this);
@@ -21,6 +24,28 @@ class CartOverlay extends Component {
   attributeStyle(item, attributeName, attributeItem) {
     const chosenStyle = item.attributesChosen.find((attribute) => Object.keys(attribute)[0] === attributeName && Object.values(attribute)[0] === attributeItem.value)
     return chosenStyle ? 'cart-overlay-chosen' : 'cart-overlay-attribute-option';
+  }
+
+  increaseQuanty(item) {
+    const { items, removeItemToCartAction } = this.props;
+
+    const filtering = items.filter((cartItem) => cartItem !== item);
+    ++item.quanty;
+
+    const toCartEdited = [...filtering, item];
+    removeItemToCartAction(toCartEdited)
+  }
+
+  decreaseQuanty(item) {
+    const { items, removeItemToCartAction } = this.props;
+
+    const filtering = items.filter((cartItem) => cartItem !== item);
+    --item.quanty;
+
+    if (item.quanty === 0) return removeItemToCartAction(filtering);
+
+    const toCartEdited = [...filtering, item];
+    removeItemToCartAction(toCartEdited)
   }
 
   renderCartItems() {
@@ -48,7 +73,8 @@ class CartOverlay extends Component {
 
     const precision = 100;
     const productPrice =  itemPrices.length ? itemPrices[0].total : 0;
-    const totalPrice = itemPrices.length >= 2 ? itemPrices.reduce(((a, b) => a + b.total), 0) * precision / precision : productPrice;
+    const totalPrice = itemPrices.length >= 2 ? (itemPrices.reduce(((a, b) => a + b.total), 0) * precision) / precision : productPrice;
+
     return (
       <div className="cart-items">
         <h3 className="my-bag">My Bag, <span className="bag-items-quanty">{items.length} { items.length > 1 ? "items" : "item"}</span></h3>
@@ -85,15 +111,15 @@ class CartOverlay extends Component {
               </div>
               <div className="cart-item-quanty-and-image">
                 <div className="item-quanty-control-container">
-                  <div className="item-quanty-control-btn">
+                  <button className="item-quanty-control-btn" onClick={ () => this.increaseQuanty(item) }>
                     +
-                  </div>
+                  </button>
                   <span>
                     {item.quanty}
                   </span>
-                  <div className="item-quanty-control-btn">
+                  <button className="item-quanty-control-btn" onClick={ () => this.decreaseQuanty(item) }>
                     -
-                  </div>
+                  </button>
                 </div>
                 <img src={item.pic} alt="cart item" className="cart-item-image" />
               </div>
@@ -147,4 +173,10 @@ const mapStateToProps = (state) => ({
   currency: state.currencyReducer.currency,
 });
 
-export default connect(mapStateToProps)(CartOverlay);
+const mapDispatchToProps = (dispatch) => ({
+  addItemToCartAction: (item) => dispatch(addItem(item)),
+  removeItemToCartAction: (item) => dispatch(removeItem(item)),
+});
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(CartOverlay);

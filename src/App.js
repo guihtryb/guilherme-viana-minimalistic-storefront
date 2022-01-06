@@ -9,7 +9,6 @@ import './App.css';
 import { ApolloProvider} from 'react-apollo';
 import apolloClient from './Services/apollo';
 
-// Finsh cartOverlay Style
 // Add and remove function
 
 // Tests

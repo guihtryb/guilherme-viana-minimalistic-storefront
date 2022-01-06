@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addItem } from '../Redux/actions';
+import { addItem, removeItem } from '../Redux/actions';
 
 class DetailsCard extends Component {
   constructor() {
@@ -12,7 +12,7 @@ class DetailsCard extends Component {
   }
 
   addItemToCart(name, prices, pic, quanty = 1) {
-    const { addItemToCartAction, items, product } = this.props;
+    const { addItemToCartAction, removeItemToCartAction, items, product } = this.props;
 
     const productItem = product[0];
     const productAttributes = productItem.attributes;
@@ -32,12 +32,16 @@ class DetailsCard extends Component {
 
       const notNewItem = items.find((item) => item.name === toCart.name);
       const notNewItemAttributes = Object.values(notNewItem.attributesChosen[0]);
-      
+
       const toCartAttrs = Object.values(Object.values(toCart.attributesChosen)[0])
       const notNewByAttrs = notNewItemAttributes.every((itemAttr, index) => itemAttr === toCartAttrs[index]);
-     
+
       if (notNewByAttrs) {
+        const filtering = items.filter((item) => item !== notNewItem);
         ++notNewItem.quanty;
+        const toCartEdited = [...filtering, notNewItem];
+
+        removeItemToCartAction(toCartEdited)
     } else {
       addItemToCartAction(toCart);
     }
@@ -137,6 +141,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   addItemToCartAction: (item) => dispatch(addItem(item)),
+  removeItemToCartAction: (item) => dispatch(removeItem(item)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DetailsCard);

@@ -1,17 +1,43 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
+import { addItem, removeItem } from '../Redux/actions';
 
 class CartProduct extends Component {
   constructor() {
     super();
     this.renderCartItems = this.renderCartItems.bind(this)
     this.attributeStyle = this.attributeStyle.bind(this)
+    this.increaseQuanty = this.increaseQuanty.bind(this)
+    this.decreaseQuanty = this.decreaseQuanty.bind(this)
   }
 
   attributeStyle(item, attributeName, attributeItem) {
     const chosenStyle = item.attributesChosen.some((attribute) => Object.keys(attribute)[0] === attributeName && Object.values(attribute)[0] === attributeItem.value);
     return chosenStyle ? 'cart-overlay-chosen' : '';
   }
+
+  increaseQuanty(item) {
+    const { items, removeItemToCartAction } = this.props;
+
+    const filtering = items.filter((cartItem) => cartItem !== item);
+    ++item.quanty;
+
+    const toCartEdited = [...filtering, item];
+    removeItemToCartAction(toCartEdited)
+  }
+
+  decreaseQuanty(item) {
+    const { items, removeItemToCartAction } = this.props;
+
+    const filtering = items.filter((cartItem) => cartItem !== item);
+    --item.quanty;
+
+    if (item.quanty === 0) return removeItemToCartAction(filtering);
+
+    const toCartEdited = [...filtering, item];
+    removeItemToCartAction(toCartEdited)
+  }
+
 
 
   renderCartItems() {
@@ -62,18 +88,14 @@ class CartProduct extends Component {
               </div>
               <div className="cart-product-quanty-and-image">
                 <div className="product-quanty-control-container">
-                  <button className="product-quanty-control-btn">
-                    <span>
+                  <button className="product-quanty-control-btn" onClick={ () => this.increaseQuanty(item)}>
                       +
-                    </span>
                   </button>
                   <span>
                     {item.quanty}
                   </span>
-                  <button className="product-quanty-control-btn">
-                  <span>
+                  <button className="product-quanty-control-btn" onClick={ () => this.decreaseQuanty(item)}>
                     -
-                  </span>
                   </button>
                 </div>
                 <img src={item.pic} alt="cart item" className="cart-product-image" />
@@ -100,4 +122,9 @@ const mapStateToProps = (state) => ({
   currency: state.currencyReducer.currency,
 });
 
-export default connect(mapStateToProps)(CartProduct);
+const mapDispatchToProps = (dispatch) => ({
+  addItemToCartAction: (item) => dispatch(addItem(item)),
+  removeItemToCartAction: (item) => dispatch(removeItem(item)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CartProduct);
