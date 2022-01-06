@@ -123,7 +123,6 @@
 }
 
 .cart-item-name-container {
-  height: 52px;
   font-family: Raleway;
   font-size: 16px;
   font-weight: 300;
@@ -240,7 +239,7 @@
 
 .cart-overlay-attribute-options {
   display: flex;
-  justify-content: space-between;
+  gap: 6px;
 }
 
 .cart-overlay-attribute-option, .cart-overlay-chosen {

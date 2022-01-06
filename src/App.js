@@ -9,8 +9,6 @@ import './App.css';
 import { ApolloProvider} from 'react-apollo';
 import apolloClient from './Services/apollo';
 
-// Add and remove function
-
 // Tests
 // Final refactor
 

@@ -71,15 +71,15 @@ class CartOverlay extends Component {
       });
     });
 
-    const precision = 100;
+    const itemsSorted = items.sort((a, b) => a.name < b.name ? -1 : 1);
     const productPrice =  itemPrices.length ? itemPrices[0].total : 0;
-    const totalPrice = itemPrices.length >= 2 ? (itemPrices.reduce(((a, b) => a + b.total), 0) * precision) / precision : productPrice;
+    const totalPrice = itemPrices.length >= 2 ? itemPrices.reduce(((a, b) => a + b.total), 0) : productPrice;
 
     return (
       <div className="cart-items">
         <h3 className="my-bag">My Bag, <span className="bag-items-quanty">{items.length} { items.length > 1 ? "items" : "item"}</span></h3>
         {
-          items.map((item, index) => (
+          itemsSorted.map((item, index) => (
             <div className="cart-item" key={index}>
               <div className="cart-item-name-and-price">
                 <div className="cart-item-name-container">
@@ -128,7 +128,7 @@ class CartOverlay extends Component {
         }
         <div className="total-price-container">
           <span className="total-price-txt">Total</span>
-          <span className="total-price-value">{changes[currency]} {totalPrice}</span>
+          <span className="total-price-value">{changes[currency]} {totalPrice.toFixed(2)}</span>
         </div>
         <div className="btn-container">
           <Link to="/cart">

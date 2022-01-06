@@ -53,11 +53,12 @@ class CartProduct extends Component {
     };
 
     const currencySymbol = (item) => changes[currentCurrency(item).currency];
+    const itemsSorted = items.sort((a, b) => a.name < b.name ? -1 : 1);
 
     return (
       <div className="cart-product-container">
         {
-          items.map((item, index) => (
+          itemsSorted.map((item, index) => (
             <div className="cart-product" key={index}>
               <div className="cart-product-infos">
                   <span className="cart-product-name">

@@ -5,7 +5,6 @@ import gql from 'graphql-tag';
 import '../Style/NavLinks.css';
 import { connect } from 'react-redux';
 import { switchCategory } from '../Redux/actions';
-import { Link } from 'react-router-dom';
 
 class NavLinks extends Component {
   constructor() {
