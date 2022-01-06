@@ -11,15 +11,20 @@ class CartOverlay extends Component {
 
     this.showHideCart = this.showHideCart.bind(this);
     this.renderCartItems = this.renderCartItems.bind(this);
+    this.attributeStyle = this.attributeStyle.bind(this);
   }
 
   showHideCart() {
     this.setState((prevState) => ({ showCart: !prevState.showCart}));
   }
 
+  attributeStyle(item, attributeName, attributeItem) {
+    const chosenStyle = item.attributesChosen.find((attribute) => Object.keys(attribute)[0] === attributeName && Object.values(attribute)[0] === attributeItem.value)
+    return chosenStyle ? 'cart-overlay-chosen' : 'cart-overlay-attribute-option';
+  }
+
   renderCartItems() {
     const { items, currency } = this.props;
-    console.log(items);
 
     const currentCurrency = (item) => item.prices.find((price) => price.currency === currency);
     const changes = {
@@ -29,11 +34,6 @@ class CartOverlay extends Component {
       JPY: "¥",
       RUB: "₽",
     };
-
-    // attributeStyle(attributeName, item) {
-      // const chosedStyle = items.attributesChosen.some((attribute) => Object.keys(attribute) === attributeName && Object.value(attribute) === item.value)
-      // return chosedStyle;
-      // }
 
     const currencySymbol = (item) => changes[currentCurrency(item).currency];
 
@@ -66,34 +66,37 @@ class CartOverlay extends Component {
                 </span>
                 {
                   item.productAttributes && item.productAttributes.map((attribute, index) => (
-                  <div className="attribute-container" key={index}>
-                    <div className="attribute-options">
-                      { attribute.name === "Color" ?
-                          attribute.items.map((item) => (
-                            <div className="attribute-option-color" style={ { backgroundColor: item.value } } key={item.value} />
-                          ))
-                        : attribute.items.map((item) => (
-                        <div className="attribute-option">
-                          { item.value }
-                          </div>
-                        ))}
+                    index < 1 &&
+                    <div className="cart-overlay-attribute-container" key={index}>
+                      <div className="cart-overlay-attribute-options">
+                        { attribute.name === "Color" ?
+                            attribute.items.map((attrItem) => (
+                              <div className="cart-overlay-attribute-option-color" style={ { backgroundColor: attrItem.value } } key={attrItem.value} />
+                            ))
+                          : attribute.items.map((attrItem) => (
+                          <div className={`${ this.attributeStyle(item, attribute.name, attrItem) }`} key={attrItem.value}>
+                            { attrItem.value }
+                            </div>
+                          ))}
+                      </div>
                     </div>
-                  </div>
                   ))
                 }
               </div>
-              <div className="cart-item-quanty">
-                <div className="item-quanty-control-btn">
-                  +
+              <div className="cart-item-quanty-and-image">
+                <div className="item-quanty-control-container">
+                  <div className="item-quanty-control-btn">
+                    +
+                  </div>
+                  <span>
+                    {item.quanty}
+                  </span>
+                  <div className="item-quanty-control-btn">
+                    -
+                  </div>
                 </div>
-                <span>
-                  {item.quanty}
-                </span>
-                <div className="item-quanty-control-btn">
-                  -
-                </div>
+                <img src={item.pic} alt="cart item" className="cart-item-image" />
               </div>
-              <img src={item.pic} alt="cart item" className="cart-item-image" />
             </div>
           ))
         }

@@ -115,6 +115,13 @@
   margin-left: 16px;
 }
 
+.cart-item-name-and-price {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-left: 16px;
+}
+
 .cart-item-name-container {
   height: 52px;
   font-family: Raleway;
@@ -122,18 +129,15 @@
   font-weight: 300;
   line-height: 160%;
   width: 136px;
-  margin-left: 16px;
   color: #1D1F22;
 }
 
 .cart-item-price {
-  margin-left: 16px;
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
   line-height: 26px;
-  letter-spacing: 0em;
-  text-align: right;
+  text-align: left;
   font-family: Raleway;
 }
 
@@ -169,6 +173,16 @@
 .view-bag-btn:hover {
   background: #1D1F22;
   color: #FFF;
+}
+.cart-item-quanty-and-image {
+  display: flex;
+}
+
+.item-quanty-control-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center; 
 }
 
 .cart-item-image {
@@ -221,5 +235,34 @@
   letter-spacing: 0em;
   line-height: 26px;
   text-align: right;
+}
 
+.cart-overlay-attribute-options {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cart-overlay-attribute-option, .cart-overlay-chosen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Source Sans Pro;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22px;
+  text-align: center;
+  min-height: 24px;
+  min-width: 24px;
+  padding: 0 2.5px;
+}
+
+.cart-overlay-chosen {
+  border: 1px solid #1D1F22;
+  background-color: #FFF;
+}
+
+.cart-overlay-attribute-option {
+  border: 1px solid #A6A6A6;
+  color: #A6A6A6;
 }

@@ -5,7 +5,14 @@ class CartProduct extends Component {
   constructor() {
     super();
     this.renderCartItems = this.renderCartItems.bind(this)
+    this.attributeStyle = this.attributeStyle.bind(this)
   }
+
+  attributeStyle(item, attributeName, attributeItem) {
+    const chosenStyle = item.attributesChosen.some((attribute) => Object.keys(attribute)[0] === attributeName && Object.values(attribute)[0] === attributeItem.value);
+    return chosenStyle ? 'cart-overlay-chosen' : '';
+  }
+
 
   renderCartItems() {
     const { items, currency } = this.props;
@@ -20,7 +27,7 @@ class CartProduct extends Component {
     };
 
     const currencySymbol = (item) => changes[currentCurrency(item).currency];
-    console.log(items);
+
     return (
       <div className="cart-product-container">
         {
@@ -35,15 +42,16 @@ class CartProduct extends Component {
                 </span>
                 {
                   item.productAttributes && item.productAttributes.map((attribute, index) => (
+                    index < 1 &&
                   <div className="attribute-container" key={index}>
                     <div className="attribute-options">
                       { attribute.name === "Color" ?
-                          attribute.items.map((item) => (
-                            <div className="attribute-option-color" style={ { backgroundColor: item.value } } key={item.value} />
+                          attribute.items.map((attrItem) => (
+                            <div className="cart-attribute-option-color" style={ { backgroundColor: attrItem.value } } key={item.value} />
                           ))
-                        : attribute.items.map((item) => (
-                        <div className="attribute-option">
-                          { item.value }
+                        : attribute.items.map((attrItem) => (
+                        <div className={`cart-attribute-option ${this.attributeStyle(item, attribute.name, attrItem) ? 'cart-chosen' : ''}`}>
+                          { attrItem.value }
                           </div>
                         ))}
                     </div>

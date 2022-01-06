@@ -30,10 +30,14 @@ class DetailsCard extends Component {
       return addItemToCartAction(toCart)
       };
 
-    const notNewItem = items.find((item) => item.name === toCart.name && item.attributes.forEach((attribute) => Object.keys(attribute) === toCart.attributes.forEach((cartAttribute) => Object.keys(cartAttribute))));
-
-    if (notNewItem) {
-      ++notNewItem.quanty;
+      const notNewItem = items.find((item) => item.name === toCart.name);
+      const notNewItemAttributes = Object.values(notNewItem.attributesChosen[0]);
+      
+      const toCartAttrs = Object.values(Object.values(toCart.attributesChosen)[0])
+      const notNewByAttrs = notNewItemAttributes.every((itemAttr, index) => itemAttr === toCartAttrs[index]);
+     
+      if (notNewByAttrs) {
+        ++notNewItem.quanty;
     } else {
       addItemToCartAction(toCart);
     }

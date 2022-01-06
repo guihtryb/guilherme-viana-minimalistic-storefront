@@ -28,6 +28,7 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
+  justify-content: space-between;
 }
 
 .cart-product-name {
@@ -49,6 +50,17 @@
   letter-spacing: 0em;
   line-height: 18px;
   text-align: left;
+}
+
+.cart-attribute-option {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #1D1F22;
+  box-sizing: border-box;
+  height: 45px;
+  width: 63px;
+  cursor: pointer;
 }
 
 .cart-product-quanty-and-image {
@@ -86,4 +98,16 @@
   top: 22.5px;
   border-radius: 0px;
   width: 15px;
+}
+
+.cart-chosen {
+  background-color: #1D1F22;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px;
+  letter-spacing: 0.05em;
+  text-align: center;
+  font-family: Source Sans Pro;
+  color: #FFF;
 }
