@@ -9,11 +9,14 @@ import './App.css';
 import { ApolloProvider} from 'react-apollo';
 import apolloClient from './Services/apollo';
 
-// overlay total price bug -> open null
 
-// cart page
-// add and remove functions
+// Finish cart Page Style
 
+// Finsh cartOverlay Style
+// Add and remove function
+
+// Tests
+// Final refactor
 
 
 class App extends Component {

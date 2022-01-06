@@ -19,6 +19,7 @@ class CartOverlay extends Component {
 
   renderCartItems() {
     const { items, currency } = this.props;
+    console.log(items);
 
     const currentCurrency = (item) => item.prices.find((price) => price.currency === currency);
     const changes = {
@@ -28,6 +29,11 @@ class CartOverlay extends Component {
       JPY: "¥",
       RUB: "₽",
     };
+
+    // attributeStyle(attributeName, item) {
+      // const chosedStyle = items.attributesChosen.some((attribute) => Object.keys(attribute) === attributeName && Object.value(attribute) === item.value)
+      // return chosedStyle;
+      // }
 
     const currencySymbol = (item) => changes[currentCurrency(item).currency];
 
@@ -43,7 +49,6 @@ class CartOverlay extends Component {
     const precision = 100;
     const productPrice =  itemPrices.length ? itemPrices[0].total : 0;
     const totalPrice = itemPrices.length >= 2 ? itemPrices.reduce(((a, b) => a + b.total), 0) * precision / precision : productPrice;
-    console.log(itemPrices, totalPrice);
     return (
       <div className="cart-items">
         <h3 className="my-bag">My Bag, <span className="bag-items-quanty">{items.length} { items.length > 1 ? "items" : "item"}</span></h3>
@@ -59,6 +64,23 @@ class CartOverlay extends Component {
                 <span className="cart-item-price">
                   {`${currencySymbol(item)}${currentCurrency(item).amount}`}
                 </span>
+                {
+                  item.productAttributes && item.productAttributes.map((attribute, index) => (
+                  <div className="attribute-container" key={index}>
+                    <div className="attribute-options">
+                      { attribute.name === "Color" ?
+                          attribute.items.map((item) => (
+                            <div className="attribute-option-color" style={ { backgroundColor: item.value } } key={item.value} />
+                          ))
+                        : attribute.items.map((item) => (
+                        <div className="attribute-option">
+                          { item.value }
+                          </div>
+                        ))}
+                    </div>
+                  </div>
+                  ))
+                }
               </div>
               <div className="cart-item-quanty">
                 <div className="item-quanty-control-btn">

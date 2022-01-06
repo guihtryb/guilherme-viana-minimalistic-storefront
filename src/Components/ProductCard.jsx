@@ -26,12 +26,16 @@ class ProductCard extends Component {
   }
 
   addItemToCart(name, prices, pic, quanty = 1) {
-    const { addItemToCartAction, items } = this.props;
+    const { product, addItemToCartAction, items } = this.props;
+
+    const productAttributes = product.attributes;
+
     const toCart = {
       name,
       prices,
       pic,
-      quanty
+      quanty,
+      productAttributes
     };
 
     if (items.length === 0){
@@ -56,6 +60,7 @@ class ProductCard extends Component {
       JPY: "¥",
       RUB: "₽",
     };
+
     const currencySymbol = changes[currentCurrency.currency];
     return (
       <div className={ product.inStock ? "product-card" : "product-card out-of-stock"} key={product.name} onMouseOver={ this.showAddToCartButton } onMouseLeave={ this.hideAddToCartButton }>

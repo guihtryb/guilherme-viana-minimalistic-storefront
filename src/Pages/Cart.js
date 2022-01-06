@@ -11,7 +11,7 @@ export default class Cart extends Component {
     return (
       <div>
         <Header />
-          <h2 className="category-container"> Cart </h2>
+          <h1 className="cart-title"> Cart </h1>
         <CartProduct />
       </div>
     )
