@@ -7,10 +7,6 @@ import NotFound from './Pages/NotFound';
 
 import './App.css';
 
-// Tests
-// Final refactor
-
-
 class App extends Component {
   render() {
     return (

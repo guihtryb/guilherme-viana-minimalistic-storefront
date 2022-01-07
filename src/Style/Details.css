@@ -3,9 +3,10 @@
 .details-page {
   display: flex;
   justify-content: space-between;
-  width: 1122px;
+  min-width: fit-content;
   margin: auto;
-  margin-top: 40px;
+  flex-wrap: wrap;
+  padding-top: 40px;
 }
 
 .product-title {
@@ -43,11 +44,13 @@
   height: 86.7vh;
   width: 730px;
   justify-content: space-between;
+  margin-left: 118px;
 }
 
 .details-infos {
-  width: 292px;
   height: 513px;
+  margin-right: 118px;
+  align-self: center;
 }
 
 .details-min-images {
@@ -150,4 +153,12 @@
 
 .attribute-option-color:hover {
   border: 2px solid #1D1F22;
+}
+
+@media screen and ( max-width : 1293px ) {
+  .details-infos {
+    margin-top: 10px;
+    margin-right: 0;
+    margin-left: 100%;
+  }
 }

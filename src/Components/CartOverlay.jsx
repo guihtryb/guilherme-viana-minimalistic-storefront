@@ -19,6 +19,15 @@ class CartOverlay extends Component {
 
   showHideCart() {
     this.setState((prevState) => ({ showCart: !prevState.showCart}));
+    const mainTag = document.body.getElementsByTagName("main");
+
+    for (let main of mainTag) {
+      console.log(main.classList);
+      if (main.classList.contains('blurr')) {
+        return main.classList.remove('blurr')
+      } 
+      return main.classList.add('blurr')
+    }
   }
 
   attributeStyle(item, attributeName, attributeItem) {

@@ -2,3 +2,10 @@
   width: 89.4vw;
   margin: auto;
 }
+
+
+.blurr {
+  border: 1px solid transparent;
+  opacity: 0.8;
+  background: rgba(57, 55, 72, 0.22);;
+}

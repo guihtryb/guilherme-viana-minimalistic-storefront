@@ -1,5 +1,10 @@
+.cart-page {
+  min-height: 87vh;
+}
+
 .cart-product-container {
   margin-bottom: 54px;
+  border: 2px solid saddlebrown;
 }
 
 .cart-title {
