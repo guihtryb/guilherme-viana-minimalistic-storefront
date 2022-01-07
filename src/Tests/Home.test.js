@@ -1,51 +1,24 @@
 import React from "react";
-import Header from '../Components/Header';
+import Home from '../Pages/Home';
 import renderWithRouterAndRedux from './helpers/renderWithRouterAndRedux'
 import { screen } from "@testing-library/react";
 import userEvent from '@testing-library/user-event'
 
-describe("Header component works correctly", () => {
-  test('Header component render elements correctly', async () => {
+describe("Home page works correctly", () => {
+  test('Home page render elements correctly', async () => {
     renderWithRouterAndRedux(
-      <Header />,
+      <Home />,
     );
+      const categoryName = await screen.findByTestId("category-name");
+      expect(categoryName).toHaveTextContent("Tech");
 
-    const clothesNavLink = await screen.findByRole("link", { name: /clothes/i });
-    const techNavLink = await screen.findByRole("link", { name: /tech/i });
-
-    const headerNavLinks = [clothesNavLink, techNavLink];
-
-    for (let navLink of headerNavLinks) {
-      expect(navLink).toBeInTheDocument();
-    }
-
-    const headerLogo = screen.getByTestId("header-logo");
-    expect(headerLogo).toBeInTheDocument();
-
-    const currencySwitcher = screen.getByTestId("currency-switcher");
-    const cartIcon = screen.getByTestId("cart-icon");
-    const headerActions = [currencySwitcher, cartIcon];
-
-    for (let element of headerActions) {
-      expect(element).toBeInTheDocument();
-    }
+      const products = await screen.findAllByRole("img");
+      expect(products).toHaveLength(6);
   });
 
-  test('Header actions works correctly', () => {
+  test('Home actions works correctly', () => {
     renderWithRouterAndRedux(
-      <Header />,
+      <Home />,
     );
-    const currencySwitcher = screen.getByTestId("currency-switcher");
-    const cartOverlay = screen.getByTestId("cart-overlay");
-
-    userEvent.click(currencySwitcher);
-    const currencyOptions = screen.getAllByTestId("currency-option");
-
-    expect(currencyOptions.length).toBe(5);
-  
-    userEvent.click(cartOverlay);
-
-    const userBag = screen.getByText("My Bag,");
-    expect(userBag).toBeInTheDocument();
   });
 });

@@ -10,7 +10,7 @@ class Category extends Component {
     return (
       <section className="category-section">
         <div className="category-container">
-          { categoryName }
+          <span data-testid="category-name">{ categoryName }</span>
         </div>
       </section>
     );
