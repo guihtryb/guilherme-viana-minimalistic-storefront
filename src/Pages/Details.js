@@ -18,7 +18,6 @@ class Details extends Component {
 
     const filterCategory = products.categories.filter((product) => product.name === category);
     const currProduct = [filterCategory[0].products.find((product) => product.id === id)];
-
     return (
       <>
         <Header />

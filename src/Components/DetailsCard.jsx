@@ -88,9 +88,9 @@ class DetailsCard extends Component {
     return (
       <aside>
         <div className="details-infos">
-          <span className="product-title">
+          <h1 className="product-title">
             { productItem.name }
-          </span>
+          </h1>
           <form onSubmit={this.handleSubmit} className="product-attributes">
             {
               productAttributes.map((attribute, index) => (
@@ -104,13 +104,13 @@ class DetailsCard extends Component {
                       if (attribute.name === "Color") {
                         return (
                           <label htmlFor={item.value} key={index}>
-                            <input id={ item.value } className="attribute-option-color" name={ attribute.name }  style={ { backgroundColor: item.value } } readOnly onClick={ this.handleAttributesChange }/>
+                            <input id={ item.value } className="attribute-option-color" name={ attribute.name } data-testid="attribute-option" style={ { backgroundColor: item.value } } readOnly onClick={ this.handleAttributesChange }/>
                           </label>
                         );
                       }
                       return (
                         <label htmlFor={item.value} key={index}>
-                          <input className="attribute-option" name={ attribute.name } value={item.value} key={index} readOnly onClick={ this.handleAttributesChange } />
+                          <input className="attribute-option" data-testid="attribute-option" name={ attribute.name } value={item.value} key={index} readOnly onClick={ this.handleAttributesChange } />
                         </label>
                       );
                     })
@@ -122,12 +122,12 @@ class DetailsCard extends Component {
           </form>
           <div className="product-price">
             <h2 className="details-price-atr">PRICE:</h2>
-            <span className="details-price">{ `${currencySymbol}${currentCurrency.amount}` }</span>
+            <span className="details-price" data-testid="product-price">{ `${currencySymbol}${currentCurrency.amount}` }</span>
           </div>
-          <button className="details-btn-add-to-cart" type="submit" disabled={ productItem.inStock ? false : true } onClick={() => this.addItemToCart(productItem.name, productItem.prices, productItem.gallery[0])}>
+          <button className="details-btn-add-to-cart" data-testid="details-add-to-cart-btn" type="submit" disabled={ productItem.inStock ? false : true } onClick={() => this.addItemToCart(productItem.name, productItem.prices, productItem.gallery[0])}>
             ADD TO CART
           </button>
-          <div className="product-description">
+          <div className="product-description" data-testid="product-description">
           { productDescrip }
           </div>
         </div>
