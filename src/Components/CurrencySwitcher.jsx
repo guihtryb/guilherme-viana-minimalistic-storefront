@@ -39,7 +39,7 @@ class CurrencySwitcher extends Component {
       <div className="currency-options">
         {
           options.map((option) => (
-            <p className="option" onClick={this.handleClick}>
+            <p className="option" onClick={ this.handleClick } data-testid="currency-option" key={Object.keys(option)}>
             {`${Object.values(option)} ${Object.keys(option)}`}
             </p>
           ))
