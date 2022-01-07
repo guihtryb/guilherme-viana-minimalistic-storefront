@@ -7,7 +7,7 @@
   justify-content: space-around;
 }
 
-.navlink-span {
+.navlink {
   display: flex;
   flex-direction: column;
   font-family: "Raleway";
@@ -19,9 +19,10 @@
   letter-spacing: 0px;
   padding: 0 16px;
   text-align: center;
+  color: #1D1F22;
 }
 
-.navlink-span:hover {
+.navlink:hover {
   border-bottom: 2px solid #5ECE7B;
   color: #5ECE7B;
   cursor: pointer;

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { addItem } from '../Redux/actions';
+import { addItem, removeItem } from '../Redux/actions';
 import '../Style/ProductCard.css'
 
 
@@ -25,18 +25,40 @@ class ProductCard extends Component {
     this.setState({ showButton: false });
   }
 
-  addItemToCart(name, prices, pic) {
-    const { addItemToCartAction } = this.props;
+  addItemToCart(name, prices, pic, quanty = 1) {
+    const { product, addItemToCartAction, removeItemToCartAction, items } = this.props;
+    const productAttributes = product.attributes;
+    const defaultAttrChosen = productAttributes.length ?
+      {
+        [productAttributes[0].name]: productAttributes[0].items[0].value
+      } : [];
+
     const toCart = {
       name,
       prices,
-      pic
+      pic,
+      quanty,
+      productAttributes,
+      attributesChosen: [defaultAttrChosen],
     };
-    addItemToCartAction(toCart);
+
+    if (items.length === 0){
+      return addItemToCartAction(toCart)
+      };
+
+    const notNewItem = items.find((item) => item.name === toCart.name);
+    if (notNewItem) {
+      const filtering = items.filter((item) => item !== notNewItem);
+      ++notNewItem.quanty;
+      const toCartEdited = [...filtering, notNewItem];
+      removeItemToCartAction(toCartEdited);
+    } else {
+      addItemToCartAction(toCart);
+    }
   }
 
   render() {
-    const { product, currency } = this.props;
+    const { product, currency, category } = this.props;
     const currentCurrency = product.prices.find((price) => price.currency === currency);
     const changes = {
       USD: "$",
@@ -45,16 +67,17 @@ class ProductCard extends Component {
       JPY: "¥",
       RUB: "₽",
     };
+
     const currencySymbol = changes[currentCurrency.currency];
     return (
       <div className={ product.inStock ? "product-card" : "product-card out-of-stock"} key={product.name} onMouseOver={ this.showAddToCartButton } onMouseLeave={ this.hideAddToCartButton }>
-        <Link to={`/details/${product.id}`}>
+        <Link to={`/details/${category}/${product.id}`}>
         <div className="image-container">
         <img className="product-image" src={product.gallery[0]} alt="product"/>
         { !product.inStock ? <span className="out-of-stock-span"> OUT OF STOCK </span> : null}
         </div>
         </Link>
-          <button onClick={() => this.addItemToCart(product.name, product.prices, product.gallery[0])} className="btn-add-to-cart" style={ this.state.showButton ? {visibility: 'visible'} : {visibility: 'hidden'}} disabled={product.inStock ? false : true}>
+          <button onClick={() => this.addItemToCart(product.name, product.prices, product.gallery[0])} className="btn-add-to-cart" style={ this.state.showButton ? {visibility: 'visible'} : {visibility: 'hidden'}} disabled={product.inStock ? false : true} data-testid="add-to-cart-btn">
           <div className="cart-overlay-container">
         <div className="cart-upper">
           <svg className="on-card upper" width="20" height="24" viewBox="0 0 20 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -86,10 +109,12 @@ class ProductCard extends Component {
 
 const mapStateToProps = (state) => ({
   currency: state.currencyReducer.currency,
+  items: state.cartItemsReducer.items,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   addItemToCartAction: (item) => dispatch(addItem(item)),
+  removeItemToCartAction: (item) => dispatch(removeItem(item)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductCard);

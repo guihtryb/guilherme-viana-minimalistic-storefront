@@ -1,14 +1,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
 
-.category-section {
-  height: 68px;
-  width: fit-content;
-  display: flex;
-  margin-top: 80px;
-  margin-bottom: 87.62px;
-}
-
 .category-container {
   color: #1D1F22;
   font-family: 'Raleway', sans-serif;
@@ -17,4 +9,10 @@
   font-size: 42px;
   line-height: 160%;
   margin-left: -1px;
+
+  height: 68px;
+  width: fit-content;
+  display: flex;
+  margin-top: 80px;
+  margin-bottom: 87.62px;
 }

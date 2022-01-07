@@ -5,14 +5,14 @@ import { connect } from 'react-redux';
 class Category extends Component {
   render() {
     const { category } = this.props;
-
     const categoryName = category[0].toUpperCase() + category.substr(1, category.length - 1);
+
     return (
-      <section className="category-section">
         <div className="category-container">
-          { categoryName }
+          <span data-testid="category-name">
+            { categoryName }
+          </span>
         </div>
-      </section>
     );
   }
 }

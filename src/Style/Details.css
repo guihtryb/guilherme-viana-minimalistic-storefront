@@ -3,10 +3,10 @@
 .details-page {
   display: flex;
   justify-content: space-between;
-  width: 1122px;
+  min-width: fit-content;
   margin: auto;
-  margin-top: 40px;
-  background-color: blur(5px);
+  flex-wrap: wrap;
+  padding-top: 40px;
 }
 
 .product-title {
@@ -15,6 +15,7 @@
   font-size: 30px;
   line-height: 27px;
   color: #1D1F22;
+  margin: 0;
 }
 
 .details-price-atr {
@@ -43,17 +44,13 @@
   height: 86.7vh;
   width: 730px;
   justify-content: space-between;
-}
-
-.details-info-section {
-  display: flex;
-  align-items: center;
-  border: 2px solid seagreen;
+  margin-left: 118px;
 }
 
 .details-infos {
-  width: 292px;
   height: 513px;
+  margin-right: 118px;
+  align-self: center;
 }
 
 .details-min-images {
@@ -125,19 +122,24 @@
 
 .attribute-option {
   border: 1px solid #1D1F22;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   height: 45px;
   width: 63px;
   cursor: pointer;
   transition: all ease 0.2s;
+  font-family: Source Sans Pro;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px;
+  letter-spacing: 0.05em;
+  text-align: center;
 }
 
-.attribute-option:hover {
+.attribute-option:hover, .attribute-option:focus {
   background: #1D1F22;
   box-sizing: border-box;
   color: #FFF;
+  outline: none;
 }
 
 .attribute-option-color {
@@ -145,10 +147,18 @@
   height: 32.5px;
   width: 32.5px;
   cursor: pointer;
-  transition: all ease 0.2s;
+  transition: all ease 0.1s;
   border: 1px solid #1D1F22
 }
 
 .attribute-option-color:hover {
   border: 2px solid #1D1F22;
+}
+
+@media screen and ( max-width : 1293px ) {
+  .details-infos {
+    margin-top: 10px;
+    margin-right: 0;
+    margin-left: 100%;
+  }
 }

@@ -11,21 +11,20 @@ import gql from 'graphql-tag'
 
 class Details extends Component {
   render() {
-    const { products, category } = this.props;
-    const { match: { params: {id} } } = this.props;
+    const { products } = this.props;
+    const { match: { params: { id, category } } } = this.props;
 
     if (!products.categories) return <h3>Loading...</h3>
 
     const filterCategory = products.categories.filter((product) => product.name === category);
     const currProduct = [filterCategory[0].products.find((product) => product.id === id)];
-
     return (
       <>
-      <Header />
-      <main className="details-page">
-        <DetailsImages product={ currProduct }/>
-        <DetailsCard product={ currProduct }/>
-      </main>
+        <Header />
+        <main className="details-page">
+          <DetailsImages product={ currProduct }/>
+          <DetailsCard product={ currProduct }/>
+        </main>
       </>
     )
   }

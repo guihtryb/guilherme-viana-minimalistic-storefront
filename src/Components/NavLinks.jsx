@@ -5,6 +5,7 @@ import gql from 'graphql-tag';
 import '../Style/NavLinks.css';
 import { connect } from 'react-redux';
 import { switchCategory } from '../Redux/actions';
+import { Link } from 'react-router-dom';
 
 class NavLinks extends Component {
   constructor() {
@@ -15,7 +16,6 @@ class NavLinks extends Component {
   handleClick({target}) {
     const { switchCategoryAction } = this.props;
 
-    
     const { innerText } = target;
     const newCategory = innerText.toLowerCase();
     switchCategoryAction(newCategory);
@@ -23,7 +23,7 @@ class NavLinks extends Component {
 
   render() {
     const { categories } = this.props;
-    
+
     if (!categories.categories) return null;
     
     const storeCategories = categories.categories;
@@ -31,9 +31,9 @@ class NavLinks extends Component {
       <nav className="navlinks-container">
         {
           storeCategories.map((category) => (
-            <span className="navlink-span" key={category.name} onClick={this.handleClick}>
-              { category.name.toUpperCase() }
-            </span>
+              <Link className="navlink"  key={category.name} onClick={(e) => this.handleClick(e)} to='/'>
+                { category.name.toUpperCase() }
+              </Link>
           ))
         }
       </nav>

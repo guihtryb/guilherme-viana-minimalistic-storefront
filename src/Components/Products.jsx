@@ -2,15 +2,19 @@ import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import ProductCard from '../Components/ProductCard';
-
-import '../Style/Products.css'
 import { connect } from 'react-redux';
+
+import '../Style/Products.css';
+import Loading from "../Images/Loading.gif"
 
 class Products extends Component {
   render() {
     const { products, category } = this.props;
-    
-    if (!products.categories) return <h3>Loading...</h3>;
+    if (!products.categories) return (
+      <div className="products-container">
+        <img className="loading" src={ Loading } alt="loading.gif"/>
+      </div>
+    )
     const currentProducts = products.categories.filter((currCategory) => currCategory.name === category);
 
     return (
@@ -18,8 +22,8 @@ class Products extends Component {
         <div className="products-container">
           {
             currentProducts.map((item) => (
-              item.products.map((product) => (
-                <ProductCard product={ product }/>
+              item.products.map((product, index) => (
+                <ProductCard product={ product } key={index} category={ category }/>
               ))
             ))
           }
@@ -38,6 +42,12 @@ query {
       id
       inStock
       gallery
+      attributes {
+        name
+        items {
+          value
+        }
+      }
       prices {
         currency
         amount

@@ -1,0 +1,124 @@
+.cart-page {
+  min-height: 87vh;
+}
+
+.cart-product-container {
+  margin-bottom: 54px;
+  border: 2px solid saddlebrown;
+}
+
+.cart-title {
+  font-family: Raleway;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 40px;
+  letter-spacing: 0em;
+  text-align: left;
+  margin: 80px 10%;
+  color: #1D1F22;
+}
+
+.cart-product {
+  border-top: 1px solid #E5E5E5;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 20px 0;
+  margin: 0 10%;
+  max-width: 1098px;
+}
+
+.cart-product-infos {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  justify-content: space-between;
+}
+
+.cart-product-name {
+  font-family: Raleway;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 27px;
+  letter-spacing: 0em;
+  text-align: left;
+  margin-bottom: 16px;
+}
+
+.cart-product-price {
+  font-family: Raleway;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: 0em;
+  line-height: 18px;
+  text-align: left;
+}
+
+.cart-attribute-option {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #1D1F22;
+  box-sizing: border-box;
+  height: 45px;
+  width: 63px;
+  cursor: pointer;
+}
+
+.cart-product-quanty-and-image {
+  display: flex;
+  justify-content: space-between;
+  width: 198px;
+  align-content: stretch;
+}
+
+.cart-product-image {
+  height: 185px;
+  width: 141px;
+}
+
+.product-quanty-control-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.product-quanty-control-btn {
+  border: 1px solid #1D1F22;
+  box-sizing: border-box;
+  border-radius: 0px;
+  height: 45px;
+  width: 45px;
+  background-color: #FFF;
+  cursor: pointer;
+}
+
+.product-quanty-control-txt {
+  height: 0px;
+  left: 15px;
+  top: 22.5px;
+  border-radius: 0px;
+  width: 15px;
+}
+
+.cart-chosen {
+  background-color: #1D1F22;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px;
+  letter-spacing: 0.05em;
+  text-align: center;
+  font-family: Source Sans Pro;
+  color: #FFF;
+}
+
+@media screen and (max-width : 610px ) {
+  .cart-product-quanty-and-image {
+    margin-top: 10px;
+  }
+}
