@@ -100,7 +100,7 @@ class CartOverlay extends Component {
                               <div className="cart-overlay-attribute-option-color" style={ { backgroundColor: attrItem.value } } key={attrItem.value} />
                             ))
                           : attribute.items.map((attrItem) => (
-                          <div className={`${ this.attributeStyle(item, attribute.name, attrItem) }`} key={attrItem.value}>
+                          <div className={`${ this.attributeStyle(item, attribute.name, attrItem) }`} data-testid="attribute-value" key={attrItem.value}>
                             { attrItem.value }
                             </div>
                           ))}

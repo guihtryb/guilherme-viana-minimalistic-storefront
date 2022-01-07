@@ -1,6 +1,6 @@
 import { screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import React from "react";
-import { scryRenderedDOMComponentsWithClass } from "react-dom/test-utils";
 import Details from '../Pages/Details';
 import renderWithRouterAndRedux from './helpers/renderWithRouterAndRedux'
 
@@ -60,4 +60,24 @@ describe("Details page works correctly", () => {
       expect(productMinImages).toHaveLength(5)
       expect(productMainImage[0].src).toBe("https://cdn.shopify.com/s/files/1/0087/6193/3920/products/DD1381200_DEOA_2_720x.jpg?v=1612816087");
   });
+    test('Details actions works correctly', async () => {
+      const { store } = renderWithRouterAndRedux(<Details product={ product }  match={paramsForTest} />)
+    
+      const attributeOptions = await screen.findAllByTestId("attribute-option");
+      const addToCartBtn = screen.getByTestId("details-add-to-cart-btn");
+      const cartOverlay = screen.getByTestId("cart-overlay");
+
+      userEvent.click(attributeOptions[2]);
+      userEvent.click(addToCartBtn);
+      userEvent.click(addToCartBtn);
+      userEvent.click(attributeOptions[0]);
+      userEvent.click(addToCartBtn);
+
+      expect(store.getState().cartItemsReducer.items).toHaveLength(2);
+
+      userEvent.click(cartOverlay);
+
+      const attributeValue = await screen.findAllByTestId("attribute-value");
+      expect(attributeValue[2]).toHaveClass('cart-overlay-chosen')
+    });
 });
