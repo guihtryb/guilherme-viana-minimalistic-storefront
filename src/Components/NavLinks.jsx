@@ -31,7 +31,7 @@ class NavLinks extends Component {
       <nav className="navlinks-container">
         {
           storeCategories.map((category) => (
-              <Link className="navlink"  key={category.name} onClick={this.handleClick} to='/'>
+              <Link className="navlink"  key={category.name} onClick={(e) => this.handleClick(e)} to='/'>
                 { category.name.toUpperCase() }
               </Link>
           ))

@@ -1,7 +1,8 @@
 import React from "react";
 import Home from '../Pages/Home';
 import renderWithRouterAndRedux from './helpers/renderWithRouterAndRedux'
-import { getByTestId, screen } from "@testing-library/react";
+
+import { screen } from "@testing-library/react";
 import userEvent from '@testing-library/user-event'
 
 describe("Home page works correctly", () => {
@@ -16,8 +17,8 @@ describe("Home page works correctly", () => {
       expect(products).toHaveLength(6);
   });
 
-  test('Home actions works correctly', async () => {
-    renderWithRouterAndRedux(
+  test('Home page actions works correctly', async () => {
+    const { store } = renderWithRouterAndRedux(
       <Home />,
     );
 
@@ -46,6 +47,8 @@ describe("Home page works correctly", () => {
 
     userEvent.click(increaseQuantyBtn[0]);
     expect(itemQuanty[0]).toHaveTextContent("2");
+
+    expect(store.getState().cartItemsReducer.items).toHaveLength(2);
 
   });
 });

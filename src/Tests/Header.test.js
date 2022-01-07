@@ -9,7 +9,6 @@ describe("Header component works correctly", () => {
     renderWithRouterAndRedux(
       <Header />,
     );
-
     const clothesNavLink = await screen.findByRole("link", { name: /clothes/i });
     const techNavLink = await screen.findByRole("link", { name: /tech/i });
 
@@ -31,10 +30,17 @@ describe("Header component works correctly", () => {
     }
   });
 
-  test('Header actions works correctly', () => {
-    renderWithRouterAndRedux(
+  test('Header actions works correctly', async () => {
+    const { store } = renderWithRouterAndRedux(
       <Header />,
     );
+    const clothesNavLink = await screen.findByRole("link", { name: /clothes/i });
+
+    clothesNavLink.innerText = "CLOTHES";
+    userEvent.click(clothesNavLink);
+
+    expect(store.getState().categoryReducer.category).toBe('clothes');
+  
     const currencySwitcher = screen.getByTestId("currency-switcher");
     const cartOverlay = screen.getByTestId("cart-overlay");
 
