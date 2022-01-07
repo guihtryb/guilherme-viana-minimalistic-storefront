@@ -77,7 +77,7 @@ class CartOverlay extends Component {
 
     return (
       <div className="cart-items">
-        <h3 className="my-bag">My Bag, <span className="bag-items-quanty">{items.length} { items.length > 1 ? "items" : "item"}</span></h3>
+        <h3 className="my-bag">My Bag, <span className="bag-items-quanty" data-testid="bag-items-quanty">{items.length} { items.length > 1 ? "items" : "item"}</span></h3>
         {
           itemsSorted.map((item, index) => (
             <div className="cart-item" key={index}>
@@ -111,10 +111,10 @@ class CartOverlay extends Component {
               </div>
               <div className="cart-item-quanty-and-image">
                 <div className="item-quanty-control-container">
-                  <button className="item-quanty-control-btn" onClick={ () => this.increaseQuanty(item) }>
+                  <button className="item-quanty-control-btn" data-testid="increase-quanty-btn" onClick={ () => this.increaseQuanty(item) }>
                     +
                   </button>
-                  <span>
+                  <span data-testid="item-quanty">
                     {item.quanty}
                   </span>
                   <button className="item-quanty-control-btn" onClick={ () => this.decreaseQuanty(item) }>

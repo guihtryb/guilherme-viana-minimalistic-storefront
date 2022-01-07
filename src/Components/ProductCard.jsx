@@ -77,7 +77,7 @@ class ProductCard extends Component {
         { !product.inStock ? <span className="out-of-stock-span"> OUT OF STOCK </span> : null}
         </div>
         </Link>
-          <button onClick={() => this.addItemToCart(product.name, product.prices, product.gallery[0])} className="btn-add-to-cart" style={ this.state.showButton ? {visibility: 'visible'} : {visibility: 'hidden'}} disabled={product.inStock ? false : true}>
+          <button onClick={() => this.addItemToCart(product.name, product.prices, product.gallery[0])} className="btn-add-to-cart" style={ this.state.showButton ? {visibility: 'visible'} : {visibility: 'hidden'}} disabled={product.inStock ? false : true} data-testid="add-to-cart-btn">
           <div className="cart-overlay-container">
         <div className="cart-upper">
           <svg className="on-card upper" width="20" height="24" viewBox="0 0 20 14" fill="none" xmlns="http://www.w3.org/2000/svg">
