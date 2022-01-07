@@ -20,12 +20,13 @@
 }
 
 .currency-switcher-container {
-  width: 38px;
+  cursor: pointer;
   height: 29px;
   display: flex;
   align-items: center;
   justify-content: space-around;
   font-family: "Raleway";
+  width: 38px;
 }
 
 .currency-switcher {

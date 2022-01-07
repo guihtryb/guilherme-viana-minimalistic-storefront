@@ -1,11 +1,28 @@
 import React from "react";
-import { render } from '@testing-library/jest-dom';
-import { BrowserRouter } from 'react-router-dom';
-import Home from '../Pages/Home';
+import Header from '../Components/Header';
 import renderWithRouterAndRedux from './helpers/renderWithRouterAndRedux'
+import { screen } from "@testing-library/react";
 
-describe("Home page works correctly", () => {
-  test('', () => {
-    renderWithRouterAndRedux(<Home />);
+describe("Header component works correctly", () => {
+  test('Header render component elements correctly', async () => {
+    renderWithRouterAndRedux(
+      <Header />,
+    );
+    const headerTexts = [/Clothes/i, /Tech/i];
+
+    for (let text of headerTexts) {
+      await screen.findByText(text);
+    }
+
+    const headerLogo = screen.getByTestId("header-logo");
+    expect(headerLogo).toBeInTheDocument();
+
+    const currencySwitcher = screen.getByTestId("currency-switcher");
+    const cartIcon = screen.getByTestId("cart-icon");
+    const headerActions = [currencySwitcher, cartIcon];
+
+    for (let element of headerActions) {
+      expect(element).toBeInTheDocument();
+    }
   });
 });

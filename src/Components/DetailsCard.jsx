@@ -29,21 +29,20 @@ class DetailsCard extends Component {
       productAttributes,
       attributesChosen: this.state === null ? [defaultAttrChosen] : [{...this.state}],
     };
-
     if (items.length === 0){
       return addItemToCartAction(toCart)
       };
 
-      const notNewItem = items.find((item) => item.name === toCart.name);
-      const notNewItemAttributes = notNewItem ? Object.values(notNewItem.attributesChosen[0]) : null;
+      const notNewItem = items.filter((item) => item.name === toCart.name);
+      const notNewItemAttributes = notNewItem ? notNewItem.map((item) => Object.values(item.attributesChosen[0])) : null;
 
       const toCartAttrs =  Object.values(Object.values(toCart.attributesChosen)[0]);
-      const notNewByAttrs = notNewItemAttributes !== null ? notNewItemAttributes.every((itemAttr, index) => itemAttr === toCartAttrs[index]) : null;
+      const notNewByAttrs = notNewItemAttributes !== null ? notNewItem.find((_, index) => notNewItemAttributes[index].every((i, index) => i === toCartAttrs[index])) : null;
 
       if (notNewByAttrs) {
-        const filtering = items.filter((item) => item !== notNewItem);
-        ++notNewItem.quanty;
-        const toCartEdited = [...filtering, notNewItem];
+        const filtering = items.filter((item) => item !== notNewByAttrs);
+        ++notNewByAttrs.quanty;
+        const toCartEdited = [...filtering, notNewByAttrs];
         removeItemToCartAction(toCartEdited);
       } else {
         addItemToCartAction(toCart);

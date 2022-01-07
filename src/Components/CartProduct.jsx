@@ -74,10 +74,10 @@ class CartProduct extends Component {
                     <div className="attribute-options">
                       { attribute.name === "Color" ?
                           attribute.items.map((attrItem) => (
-                            <div className="cart-attribute-option-color" style={ { backgroundColor: attrItem.value } } key={item.value} />
+                            <div className="cart-attribute-option-color" style={ { backgroundColor: attrItem.value } } key={attrItem.value} />
                           ))
                         : attribute.items.map((attrItem) => (
-                        <div className={`cart-attribute-option ${this.attributeStyle(item, attribute.name, attrItem) ? 'cart-chosen' : ''}`}>
+                        <div className={`cart-attribute-option ${this.attributeStyle(item, attribute.name, attrItem) ? 'cart-chosen' : ''}`} key={attrItem.value}>
                           { attrItem.value }
                           </div>
                         ))}
