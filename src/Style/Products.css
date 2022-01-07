@@ -10,6 +10,12 @@ a {
   justify-content: space-between;
 }
 
+
+.loading {
+  margin: 0 auto;
+  margin-top: -12%;
+}
+
 @media screen and ( max-width : 876px ) {
   .products-container {
     justify-content: center;

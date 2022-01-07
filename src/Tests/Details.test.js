@@ -32,7 +32,7 @@ describe("Details page works correctly", () => {
   };
   
   test('Details page render elements correctly', async () => {
-    renderWithRouterAndRedux(<Details product={ product }  match={paramsForTest}/>, {
+    renderWithRouterAndRedux(<Details product={ product }  match={ paramsForTest }/>, {
     });
       const productName = await screen.findByRole('heading', {
         name: product.name,

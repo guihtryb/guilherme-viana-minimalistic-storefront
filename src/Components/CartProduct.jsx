@@ -61,7 +61,7 @@ class CartProduct extends Component {
           itemsSorted.map((item, index) => (
             <div className="cart-product" key={index}>
               <div className="cart-product-infos">
-                  <span className="cart-product-name">
+                  <span className="cart-product-name" data-testid="cart-product-name">
                     { item.name }
                   </span>
                 <span className="cart-product-price">
@@ -77,7 +77,7 @@ class CartProduct extends Component {
                             <div className="cart-attribute-option-color" style={ { backgroundColor: attrItem.value } } key={attrItem.value} />
                           ))
                         : attribute.items.map((attrItem) => (
-                        <div className={`cart-attribute-option ${this.attributeStyle(item, attribute.name, attrItem) ? 'cart-chosen' : ''}`} key={attrItem.value}>
+                        <div data-testid="attribute-option" className={`cart-attribute-option ${this.attributeStyle(item, attribute.name, attrItem) ? 'cart-chosen' : ''}`} key={attrItem.value}>
                           { attrItem.value }
                           </div>
                         ))}
