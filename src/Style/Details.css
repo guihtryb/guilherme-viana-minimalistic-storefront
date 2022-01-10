@@ -137,7 +137,6 @@
 
 .attribute-option:hover, .attribute-option:focus {
   background: #1D1F22;
-  box-sizing: border-box;
   color: #FFF;
   outline: none;
 }
