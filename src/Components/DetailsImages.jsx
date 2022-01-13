@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import ReactImageMagnify from 'react-image-magnify';
-
 
 export default class DetailsImages extends Component {
   constructor() {
@@ -33,19 +31,7 @@ export default class DetailsImages extends Component {
             )
           }
         </div>
-          <ReactImageMagnify {...{
-            imageClassName: "details-lar-img",
-            smallImage: {
-              alt: 'Product',
-              isFluidWidth: true,
-              src: productItem.gallery[imageIndex],
-            },
-            largeImage: {
-              src: productItem.gallery[imageIndex],
-              width: 690,
-              height: 700
-            }
-          }} />
+          <img src={productItem.gallery[imageIndex]} alt="product.png" />
       </section>
     )
   }

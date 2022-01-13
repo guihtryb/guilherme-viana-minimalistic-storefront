@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addItem, removeItem } from '../Redux/actions';
+import { currenciesObject } from '../Utils';
 
 class DetailsCard extends Component {
   constructor() {
@@ -11,7 +12,7 @@ class DetailsCard extends Component {
     this.handleAttributesChange = this.handleAttributesChange.bind(this);
   }
 
-  addItemToCart(name, prices, pic, quanty = 1) {
+  addItemToCart(name, prices, pic, quantity = 1) {
     const { addItemToCartAction, removeItemToCartAction, items, product } = this.props;
 
     const productItem = product[0];
@@ -25,7 +26,7 @@ class DetailsCard extends Component {
       name,
       prices,
       pic,
-      quanty,
+      quantity,
       productAttributes,
       attributesChosen: this.state === null ? [defaultAttrChosen] : [{...this.state}],
     };
@@ -41,7 +42,7 @@ class DetailsCard extends Component {
 
       if (notNewByAttrs) {
         const filtering = items.filter((item) => item !== notNewByAttrs);
-        ++notNewByAttrs.quanty;
+        ++notNewByAttrs.quantity;
         const toCartEdited = [...filtering, notNewByAttrs];
         removeItemToCartAction(toCartEdited);
       } else {
@@ -69,18 +70,9 @@ class DetailsCard extends Component {
     if (!product.length) return null;
 
     const currentCurrency = product[0].prices.find((price) => price.currency === currency);
-
-    const changes = {
-      USD: "$",
-      GBP: "£",
-      AUD: "A$",
-      JPY: "¥",
-      RUB: "₽",
-    };
-
     const productItem = product[0];
     const productAttributes = productItem.attributes;
-    const currencySymbol = changes[currentCurrency.currency];
+    const currencySymbol = currenciesObject[currentCurrency.currency];
     const htmlStr = productItem.description;
     const parser = new DOMParser();
     const productDescrip = parser.parseFromString(htmlStr, "text/html").body.textContent || "";
@@ -110,7 +102,7 @@ class DetailsCard extends Component {
                       }
                       return (
                         <label htmlFor={item.value} key={index}>
-                          <input className="attribute-option" data-testid="attribute-option" name={ attribute.name } value={item.value} key={index} readOnly onClick={ this.handleAttributesChange } />
+                          <input  type="checkbox" className="attribute-option" data-testid="attribute-option" name={ attribute.name } value={item.value} key={index} readOnly onClick={ this.handleAttributesChange } />
                         </label>
                       );
                     })

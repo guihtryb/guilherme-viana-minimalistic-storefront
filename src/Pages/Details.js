@@ -21,12 +21,14 @@ class Details extends Component {
     return (
       <>
         <Header />
-        <main className="details-page">
-          <DetailsImages product={ currProduct }/>
-          <DetailsCard product={ currProduct }/>
+        <main className="details-main">
+          <div className="details-container">
+            <DetailsImages product={ currProduct }/>
+            <DetailsCard product={ currProduct }/>
+          </div>
         </main>
       </>
-    )
+    );
   }
 }
 

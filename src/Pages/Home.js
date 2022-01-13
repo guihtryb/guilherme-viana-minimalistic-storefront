@@ -11,10 +11,10 @@ export default class Home extends Component {
     return (
       <>
         <Header />
-        <main className="home-page">
-          <section className='category-and-products-container'>
+        <main className="home-main">
           <Category />
-          <Products />
+          <section className="products-section">
+            <Products />
           </section>
         </main>
       </>

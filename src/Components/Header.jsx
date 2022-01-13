@@ -5,7 +5,6 @@ import StoreLogo from './StoreLogo'
 import CurrencySwitcher from './CurrencySwitcher'
 import CartOverlay from './CartOverlay'
 
-
 export default class Header extends Component {
   render() {
     return (

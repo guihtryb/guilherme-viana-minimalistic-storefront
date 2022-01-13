@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
 
-.details-page {
+.details-main {
   display: flex;
   justify-content: space-between;
   min-width: fit-content;
@@ -137,7 +137,6 @@
 
 .attribute-option:hover, .attribute-option:focus {
   background: #1D1F22;
-  box-sizing: border-box;
   color: #FFF;
   outline: none;
 }

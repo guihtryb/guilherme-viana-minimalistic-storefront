@@ -8,11 +8,11 @@ class Category extends Component {
     const categoryName = category[0].toUpperCase() + category.substr(1, category.length - 1);
 
     return (
-        <div className="category-container">
-          <span data-testid="category-name">
+        <article className="category-container">
+          <h1 data-testid="category-name">
             { categoryName }
-          </span>
-        </div>
+          </h1>
+        </article>
     );
   }
 }

@@ -129,7 +129,7 @@
   margin-bottom: 40px;
 }
 
-.my-bag, .bag-items-quanty {
+.my-bag, .bag-items-quantity {
   font-family: Raleway;
   font-size: 16px;
   line-height: 25px;
@@ -138,7 +138,7 @@
   margin-bottom: 25px;
 }
 
-.bag-items-quanty {
+.bag-items-quantity {
   font-weight: 500;
 }
 
@@ -205,11 +205,11 @@
   background: #1D1F22;
   color: #FFF;
 }
-.cart-item-quanty-and-image {
+.cart-item-quantity-and-image {
   display: flex;
 }
 
-.item-quanty-control-container {
+.item-quantity-control-container {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -223,7 +223,7 @@
   margin-left: 10px;
 }
 
-.cart-item-quanty {
+.cart-item-quantity {
   display: flex;
   flex-direction: column;
   align-self: stretch;
@@ -231,7 +231,7 @@
   justify-content: space-between;
 }
 
-.item-quanty-control-btn {
+.item-quantity-control-btn {
   align-items: center;
   background-color: #FFF;
   box-sizing: border-box;

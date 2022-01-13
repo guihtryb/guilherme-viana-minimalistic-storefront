@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { addItem, removeItem } from '../Redux/actions';
 import '../Style/ProductCard.css'
-
+import { currenciesObject } from '../Utils';
 
 class ProductCard extends Component {
   constructor() {
@@ -25,7 +25,7 @@ class ProductCard extends Component {
     this.setState({ showButton: false });
   }
 
-  addItemToCart(name, prices, pic, quanty = 1) {
+  addItemToCart(name, prices, pic, quantity = 1) {
     const { product, addItemToCartAction, removeItemToCartAction, items } = this.props;
     const productAttributes = product.attributes;
     const defaultAttrChosen = productAttributes.length ?
@@ -37,7 +37,7 @@ class ProductCard extends Component {
       name,
       prices,
       pic,
-      quanty,
+      quantity,
       productAttributes,
       attributesChosen: [defaultAttrChosen],
     };
@@ -49,7 +49,7 @@ class ProductCard extends Component {
     const notNewItem = items.find((item) => item.name === toCart.name);
     if (notNewItem) {
       const filtering = items.filter((item) => item !== notNewItem);
-      ++notNewItem.quanty;
+      ++notNewItem.quantity;
       const toCartEdited = [...filtering, notNewItem];
       removeItemToCartAction(toCartEdited);
     } else {
@@ -60,15 +60,8 @@ class ProductCard extends Component {
   render() {
     const { product, currency, category } = this.props;
     const currentCurrency = product.prices.find((price) => price.currency === currency);
-    const changes = {
-      USD: "$",
-      GBP: "£",
-      AUD: "A$",
-      JPY: "¥",
-      RUB: "₽",
-    };
 
-    const currencySymbol = changes[currentCurrency.currency];
+    const currencySymbol = currenciesObject[currentCurrency.currency];
     return (
       <div className={ product.inStock ? "product-card" : "product-card out-of-stock"} key={product.name} onMouseOver={ this.showAddToCartButton } onMouseLeave={ this.hideAddToCartButton }>
         <Link to={`/details/${category}/${product.id}`}>

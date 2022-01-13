@@ -38,7 +38,7 @@ const simulatedItems = [
       currency: 'RUB', amount: 10941.76,
     },
   ],
-  quanty: 2,
+  quantity: 2,
   },
   {
     attributesChosen: [{
@@ -72,7 +72,7 @@ const simulatedItems = [
         currency: 'RUB', amount: 10941.76,
       },
     ],
-    quanty: 1,
+    quantity: 1,
     },
 ]; 
   test('Cart page has the correct title', () => {
@@ -93,10 +93,9 @@ const simulatedItems = [
         },
         currencyReducer: {
           currency: "JPY"
-        }
+        },
       }
     });
-
     const productTitle = await screen.findAllByText(simulatedItems[0].name);
     const attributeOption = await screen.findAllByTestId("attribute-option");
     const actualCurrency = await screen.findAllByText(/¥/i);

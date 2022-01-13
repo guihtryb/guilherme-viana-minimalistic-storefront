@@ -2,13 +2,15 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { addItem, removeItem } from '../Redux/actions';
 
+import { currenciesObject } from '../Utils';
+
 class CartProduct extends Component {
   constructor() {
     super();
     this.renderCartItems = this.renderCartItems.bind(this)
     this.attributeStyle = this.attributeStyle.bind(this)
-    this.increaseQuanty = this.increaseQuanty.bind(this)
-    this.decreaseQuanty = this.decreaseQuanty.bind(this)
+    this.increaseQuantity = this.increaseQuantity.bind(this)
+    this.decreaseQuantity = this.decreaseQuantity.bind(this)
   }
 
   attributeStyle(item, attributeName, attributeItem) {
@@ -16,43 +18,32 @@ class CartProduct extends Component {
     return chosenStyle ? 'cart-overlay-chosen' : '';
   }
 
-  increaseQuanty(item) {
+  increaseQuantity(item) {
     const { items, removeItemToCartAction } = this.props;
 
     const filtering = items.filter((cartItem) => cartItem !== item);
-    ++item.quanty;
+    ++item.quantity;
 
     const toCartEdited = [...filtering, item];
     removeItemToCartAction(toCartEdited)
   }
 
-  decreaseQuanty(item) {
+  decreaseQuantity(item) {
     const { items, removeItemToCartAction } = this.props;
 
     const filtering = items.filter((cartItem) => cartItem !== item);
-    --item.quanty;
+    --item.quantity;
 
-    if (item.quanty === 0) return removeItemToCartAction(filtering);
+    if (item.quantity === 0) return removeItemToCartAction(filtering);
 
     const toCartEdited = [...filtering, item];
     removeItemToCartAction(toCartEdited)
   }
-
-
 
   renderCartItems() {
     const { items, currency } = this.props;
-
     const currentCurrency = (item) => item.prices.find((price) => price.currency === currency);
-    const changes = {
-      USD: "$",
-      GBP: "£",
-      AUD: "A$",
-      JPY: "¥",
-      RUB: "₽",
-    };
-
-    const currencySymbol = (item) => changes[currentCurrency(item).currency];
+    const currencySymbol = (item) => currenciesObject[currentCurrency(item).currency];
     const itemsSorted = items.sort((a, b) => a.name < b.name ? -1 : 1);
 
     return (
@@ -85,17 +76,16 @@ class CartProduct extends Component {
                   </div>
                   ))
                 }
-
               </div>
-              <div className="cart-product-quanty-and-image">
-                <div className="product-quanty-control-container">
-                  <button className="product-quanty-control-btn" onClick={ () => this.increaseQuanty(item)}>
+              <div className="cart-product-quantity-and-image">
+                <div className="product-quantity-control-container">
+                  <button className="product-quantity-control-btn" onClick={ () => this.increaseQuantity(item)}>
                       +
                   </button>
                   <span>
-                    {item.quanty}
+                    {item.quantity}
                   </span>
-                  <button className="product-quanty-control-btn" onClick={ () => this.decreaseQuanty(item)}>
+                  <button className="product-quantity-control-btn" onClick={ () => this.decreaseQuantity(item)}>
                     -
                   </button>
                 </div>

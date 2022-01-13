@@ -11,11 +11,13 @@ export default class Cart extends Component {
     return (
       <>
         <Header />
-          <main className="cart-page">
-            <h1 className="cart-title"> Cart </h1>
+          <main className="cart-main">
+            <article>
+              <h1 className="cart-title"> Cart </h1>
+            </article>
             <CartProduct />
           </main>
       </>
-    )
+    );
   }
 }

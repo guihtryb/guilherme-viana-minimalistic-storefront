@@ -25,8 +25,8 @@ class NavLinks extends Component {
     const { categories } = this.props;
 
     if (!categories.categories) return null;
-    
     const storeCategories = categories.categories;
+
     return (
       <nav className="navlinks-container">
         {
@@ -54,7 +54,6 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const NavLinksComp = connect(null, mapDispatchToProps)(NavLinks);
-
 
 export default graphql(CategoriesQuery, {
   name: 'categories',

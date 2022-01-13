@@ -10,14 +10,12 @@ import './App.css';
 class App extends Component {
   render() {
     return (
-      <div className='app'>
-        <Switch>
-          <Route exact path="/" component={ Home }/>
-          <Route exact path="/cart" component={ Cart }/>
-          <Route exact path="/details/:category/:id" render={(props) => <Details {...props} /> }/>
-          <Route component={ NotFound }/>
-        </Switch>
-      </div>
+      <Switch>
+        <Route exact path="/" component={ Home }/>
+        <Route exact path="/cart" component={ Cart }/>
+        <Route exact path="/details/:category/:id" render={(props) => <Details {...props} /> }/>
+        <Route component={ NotFound }/>
+      </Switch>
     );
   }
 }

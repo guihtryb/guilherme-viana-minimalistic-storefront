@@ -27,26 +27,26 @@ describe("Home page works correctly", () => {
     
     userEvent.click(cartOverlay);
 
-    const userBagItemsQuanty = screen.getByTestId("bag-items-quanty");
+    const userBagItemsQuantity = screen.getByTestId("bag-items-quantity");
 
     userEvent.click(addToCartButton[0]);
 
-    expect(userBagItemsQuanty).toBeInTheDocument();
-    expect(userBagItemsQuanty).toHaveTextContent("0");
+    expect(userBagItemsQuantity).toBeInTheDocument();
+    expect(userBagItemsQuantity).toHaveTextContent("0");
 
     userEvent.click(addToCartButton[2]);
-    expect(userBagItemsQuanty).toHaveTextContent("1");
+    expect(userBagItemsQuantity).toHaveTextContent("1");
 
     userEvent.click(addToCartButton[3]);
-    expect(userBagItemsQuanty).toHaveTextContent("2 items");
+    expect(userBagItemsQuantity).toHaveTextContent("2 items");
 
-    const increaseQuantyBtn = screen.getAllByTestId("increase-quanty-btn");
+    const increaseQuantityBtn = screen.getAllByTestId("increase-quantity-btn");
 
-    const itemQuanty = screen.getAllByTestId("item-quanty");
-    expect(itemQuanty[0]).toHaveTextContent("1");
+    const itemQuantity = screen.getAllByTestId("item-quantity");
+    expect(itemQuantity[0]).toHaveTextContent("1");
 
-    userEvent.click(increaseQuantyBtn[0]);
-    expect(itemQuanty[0]).toHaveTextContent("2");
+    userEvent.click(increaseQuantityBtn[0]);
+    expect(itemQuantity[0]).toHaveTextContent("2");
 
     expect(store.getState().cartItemsReducer.items).toHaveLength(2);
 

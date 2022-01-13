@@ -18,7 +18,6 @@ class Products extends Component {
     const currentProducts = products.categories.filter((currCategory) => currCategory.name === category);
 
     return (
-      <section className="products-section">
         <div className="products-container">
           {
             currentProducts.map((item) => (
@@ -28,7 +27,6 @@ class Products extends Component {
             ))
           }
         </div>
-      </section>
     )
   }
 }
