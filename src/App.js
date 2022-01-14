@@ -11,10 +11,14 @@ class App extends Component {
   render() {
     return (
       <Switch>
-        <Route exact path="/" component={ Home }/>
-        <Route exact path="/cart" component={ Cart }/>
-        <Route exact path="/details/:category/:id" render={(props) => <Details {...props} /> }/>
-        <Route component={ NotFound }/>
+        <Route exact path="/" component={ Home } />
+        <Route exact path="/cart" component={ Cart } />
+        <Route
+          exact
+          path="/details/:category/:id"
+          render={ (props) => <Details { ...props } /> }
+        />
+        <Route component={ NotFound } />
       </Switch>
     );
   }

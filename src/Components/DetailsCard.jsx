@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addItem, removeItem } from '../Redux/actions';
 import { currenciesObject } from '../Utils';
+import PropTypes from 'prop-types';
 
 class DetailsCard extends Component {
   constructor() {
@@ -14,7 +15,6 @@ class DetailsCard extends Component {
 
   addItemToCart(name, prices, pic, quantity = 1) {
     const { addItemToCartAction, removeItemToCartAction, items, product } = this.props;
-
     const productItem = product[0];
     const productAttributes = productItem.attributes;
     const defaultAttrChosen = productAttributes.length ?
@@ -30,24 +30,28 @@ class DetailsCard extends Component {
       productAttributes,
       attributesChosen: this.state === null ? [defaultAttrChosen] : [{...this.state}],
     };
+
     if (items.length === 0){
-      return addItemToCartAction(toCart)
-      };
+      return addItemToCartAction(toCart);
+    }
 
-      const notNewItem = items.filter((item) => item.name === toCart.name);
-      const notNewItemAttributes = notNewItem ? notNewItem.map((item) => Object.values(item.attributesChosen[0])) : null;
+    const notNewItem = items.filter((item) => item.name === toCart.name);
+    const notNewItemAttributes = notNewItem ? notNewItem.map((item) => Object
+      .values(item.attributesChosen[0])) : null;
 
-      const toCartAttrs =  Object.values(Object.values(toCart.attributesChosen)[0]);
-      const notNewByAttrs = notNewItemAttributes !== null ? notNewItem.find((_, index) => notNewItemAttributes[index].every((i, index) => i === toCartAttrs[index])) : null;
+    const toCartAttrs =  Object.values(Object.values(toCart.attributesChosen)[0]);
+    const notNewByAttrs = notNewItemAttributes !== null ? notNewItem
+      .find((_, index) => notNewItemAttributes[index]
+        .every((i, index) => i === toCartAttrs[index])) : null;
 
-      if (notNewByAttrs) {
-        const filtering = items.filter((item) => item !== notNewByAttrs);
-        ++notNewByAttrs.quantity;
-        const toCartEdited = [...filtering, notNewByAttrs];
-        removeItemToCartAction(toCartEdited);
-      } else {
-        addItemToCartAction(toCart);
-      }
+    if (notNewByAttrs) {
+      const filtering = items.filter((item) => item !== notNewByAttrs);
+      ++notNewByAttrs.quantity;
+      const toCartEdited = [...filtering, notNewByAttrs];
+      removeItemToCartAction(toCartEdited);
+    } else {
+      addItemToCartAction(toCart);
+    }
   }
 
   handleSubmit(e) {
@@ -58,10 +62,10 @@ class DetailsCard extends Component {
     const { name } = target;
     const { value } = target;
 
-    this.setState({
-      ...this.state,
+    this.setState((prevState) => ({
+      ...prevState,
       [name]: value,
-    });
+    }));
   }
 
   render() {
@@ -69,13 +73,15 @@ class DetailsCard extends Component {
 
     if (!product.length) return null;
 
-    const currentCurrency = product[0].prices.find((price) => price.currency === currency);
+    const currentCurrency = product[0].prices
+      .find((price) => price.currency === currency);
     const productItem = product[0];
     const productAttributes = productItem.attributes;
     const currencySymbol = currenciesObject[currentCurrency.currency];
     const htmlStr = productItem.description;
     const parser = new DOMParser();
-    const productDescrip = parser.parseFromString(htmlStr, "text/html").body.textContent || "";
+    const productDescrip = parser
+      .parseFromString(htmlStr, 'text/html').body.textContent || '';
 
     return (
       <aside>
@@ -83,44 +89,76 @@ class DetailsCard extends Component {
           <h1 className="product-title">
             { productItem.name }
           </h1>
-          <form onSubmit={this.handleSubmit} className="product-attributes">
+          <form onSubmit={ this.handleSubmit } className="product-attributes">
             {
               productAttributes.map((attribute, index) => (
-              <div className="attribute-container" key={index}>
-                <h2 className="attribute-name">
-                  { attribute.name }:
-                </h2>
-                <div className="attribute-options">
-                  {
-                    attribute.items.map((item, index) => {
-                      if (attribute.name === "Color") {
+                <div className="attribute-container" key={ index }>
+                  <h2 className="attribute-name">
+                    { attribute.name }:
+                  </h2>
+                  <div className="attribute-options">
+                    {
+                      attribute.items.map((item, index) => {
+                        if (attribute.name === 'Color') {
+                          return (
+                            <label htmlFor={ item.value } key={ index }>
+                              <input
+                                type="radio"
+                                id={ item.value }
+                                className="attribute-option-color"
+                                name={ attribute.name }
+                                data-testid="attribute-option"
+                                style={ { backgroundColor: item.value } }
+                                onClick={ this.handleAttributesChange } 
+                              />
+                            </label>
+                          );
+                        }
                         return (
-                          <label htmlFor={item.value} key={index}>
-                            <input id={ item.value } className="attribute-option-color" name={ attribute.name } data-testid="attribute-option" style={ { backgroundColor: item.value } } readOnly onClick={ this.handleAttributesChange }/>
-                          </label>
+                          <div className="attribute-container" key={ attribute.name }>
+                            <div className="attribute-option">
+                              <label htmlFor={ item.value } key={ index }> {item.value}
+                                <input
+                                  id={ item.value }
+                                  type="radio"
+                                  data-testid="attribute-option"
+                                  name={ attribute.name }
+                                  value={ item.value }
+                                  key={ index }
+                                  onClick={ this.handleAttributesChange }
+                                />
+                              </label>
+                            </div>
+                          </div>
                         );
-                      }
-                      return (
-                        <label htmlFor={item.value} key={index}>
-                          <input  type="checkbox" className="attribute-option" data-testid="attribute-option" name={ attribute.name } value={item.value} key={index} readOnly onClick={ this.handleAttributesChange } />
-                        </label>
-                      );
-                    })
-                  }
+                      })
+                    }
+                  </div>
                 </div>
-              </div>
               ))
             }
           </form>
           <div className="product-price">
             <h2 className="details-price-atr">PRICE:</h2>
-            <span className="details-price" data-testid="product-price">{ `${currencySymbol}${currentCurrency.amount}` }</span>
+            <span
+              className="details-price"
+              data-testid="product-price"
+            >
+              { `${currencySymbol}${currentCurrency.amount}` }
+            </span>
           </div>
-          <button className="details-btn-add-to-cart" data-testid="details-add-to-cart-btn" type="submit" disabled={ productItem.inStock ? false : true } onClick={() => this.addItemToCart(productItem.name, productItem.prices, productItem.gallery[0])}>
+          <button
+            className="details-btn-add-to-cart"
+            data-testid="details-add-to-cart-btn"
+            type="submit"
+            disabled={ productItem.inStock ? false : true }
+            onClick={ () => this.addItemToCart(productItem.name,
+              productItem.prices, productItem.gallery[0]) }
+          >
             ADD TO CART
           </button>
           <div className="product-description" data-testid="product-description">
-          { productDescrip }
+            { productDescrip }
           </div>
         </div>
       </aside>
@@ -138,4 +176,13 @@ const mapDispatchToProps = (dispatch) => ({
   removeItemToCartAction: (item) => dispatch(removeItem(item)),
 });
 
+DetailsCard.propTypes = {
+  addItemToCartAction: PropTypes.func.isRequired,
+  removeItemToCartAction: PropTypes.func.isRequired,
+  items: PropTypes.arrayOf(Object).isRequired,
+  product: PropTypes.arrayOf(Object).isRequired,
+  currency: PropTypes.arrayOf(Object).isRequired
+};
+
 export default connect(mapStateToProps, mapDispatchToProps)(DetailsCard);
+

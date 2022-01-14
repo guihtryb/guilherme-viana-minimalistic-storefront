@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
-
-import '../Style/NavLinks.css';
 import { connect } from 'react-redux';
-import { switchCategory } from '../Redux/actions';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+
+
+import { switchCategory } from '../Redux/actions';
+import '../Style/NavLinks.css';
 
 class NavLinks extends Component {
   constructor() {
@@ -23,7 +25,6 @@ class NavLinks extends Component {
 
   render() {
     const { categories } = this.props;
-
     if (!categories.categories) return null;
     const storeCategories = categories.categories;
 
@@ -31,9 +32,13 @@ class NavLinks extends Component {
       <nav className="navlinks-container">
         {
           storeCategories.map((category) => (
-              <Link className="navlink"  key={category.name} onClick={(e) => this.handleClick(e)} to='/'>
-                { category.name.toUpperCase() }
-              </Link>
+            <Link
+              key={ category.name }
+              onClick={ (e) => this.handleClick(e) }
+              to='/'
+            >
+              { category.name.toUpperCase() }
+            </Link>
           ))
         }
       </nav>
@@ -54,6 +59,11 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const NavLinksComp = connect(null, mapDispatchToProps)(NavLinks);
+
+NavLinks.propTypes = {
+  switchCategoryAction: PropTypes.func.isRequired,
+  categories: PropTypes.objectOf(Object).isRequired,
+};
 
 export default graphql(CategoriesQuery, {
   name: 'categories',

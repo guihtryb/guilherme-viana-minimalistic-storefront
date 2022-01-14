@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
-import Category from '../Components/Category'
-import Header from '../Components/Header'
-import Products from '../Components/Products'
+import React, { Component } from 'react';
+import Category from '../Components/Category';
+import Header from '../Components/Header';
+import Products from '../Components/Products';
 
-import '../Style/Home.css'
+import '../Style/Home.css';
 
 
 export default class Home extends Component {

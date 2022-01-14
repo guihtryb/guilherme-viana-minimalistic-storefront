@@ -1,30 +1,34 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
-import Header from '../Components/Header'
-import DetailsImages from '../Components/DetailsImages'
-import DetailsCard from '../Components/DetailsCard'
+import Header from '../Components/Header';
+import DetailsImages from '../Components/DetailsImages';
+import DetailsCard from '../Components/DetailsCard';
 
-import '../Style/Details.css'
-import { connect } from 'react-redux'
-import { graphql } from 'react-apollo'
-import gql from 'graphql-tag'
+import '../Style/Details.css';
+import { connect } from 'react-redux';
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
+import PropTypes from 'prop-types';
 
 class Details extends Component {
   render() {
     const { products } = this.props;
     const { match: { params: { id, category } } } = this.props;
 
-    if (!products.categories) return <h3>Loading...</h3>
+    if (!products.categories) return <h3>Loading...</h3>;
 
-    const filterCategory = products.categories.filter((product) => product.name === category);
+    const filterCategory = products.categories
+      .filter((product) => product.name === category);
+
     const currProduct = [filterCategory[0].products.find((product) => product.id === id)];
+
     return (
       <>
         <Header />
         <main className="details-main">
           <div className="details-container">
-            <DetailsImages product={ currProduct }/>
-            <DetailsCard product={ currProduct }/>
+            <DetailsImages product={ currProduct } />
+            <DetailsCard product={ currProduct } />
           </div>
         </main>
       </>
@@ -63,6 +67,15 @@ const mapStateToProps = (state) => ({
 
 const DetailsComp = connect(mapStateToProps)(Details);
 
+Details.propTypes = {
+  match: PropTypes.shape({
+    isExact: PropTypes.bool,
+    path: PropTypes.string,
+    url: PropTypes.string,
+    params: PropTypes.objectOf(String)
+  }).isRequired,
+  products: PropTypes.objectOf(Object).isRequired,
+};
 
 export default graphql(ProductsQuery, {
   name: 'products',

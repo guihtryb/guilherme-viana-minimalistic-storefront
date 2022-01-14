@@ -7,7 +7,7 @@
   justify-content: space-around;
 }
 
-.navlink {
+.navlinks-container a {
   display: flex;
   flex-direction: column;
   font-family: "Raleway";
@@ -22,7 +22,7 @@
   color: #1D1F22;
 }
 
-.navlink:hover {
+.navlinks-container a:hover {
   border-bottom: 2px solid #5ECE7B;
   color: #5ECE7B;
   cursor: pointer;

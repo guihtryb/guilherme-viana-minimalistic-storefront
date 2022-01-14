@@ -1,6 +1,7 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { switchCurrency } from '../Redux/actions/index';
+import PropTypes from 'prop-types';
 
 import { currenciesArray, currenciesObject } from '../Utils';
 
@@ -23,7 +24,7 @@ class CurrencySwitcher extends Component {
   handleClick(e) {
     const { switchCurrencyAction } = this.props;
 
-    const value = e.target.innerText.split(" ");
+    const value = e.target.innerText.split(' ');
     const newCurrency = value[1];
     switchCurrencyAction(newCurrency);
   }
@@ -33,27 +34,42 @@ class CurrencySwitcher extends Component {
       <div className="currency-options">
         {
           currenciesArray.map((option) => (
-            <p className="option" onClick={ this.handleClick } data-testid="currency-option" key={Object.keys(option)}>
-            {`${Object.values(option)} ${Object.keys(option)}`}
+            <p
+              className="option"
+              onClick={ this.handleClick }
+              data-testid="currency-option"
+              key={ Object.keys(option) }
+            >
+              {`${Object.values(option)} ${Object.keys(option)}`}
             </p>
           ))
         }
       </div>
-    )
+    );
   }
 
   render() {
     const { currency } = this.props;
+    const { showCurrencies } = this.state;
 
     return (
-      <div className="currency-switcher-container" data-testid="currency-switcher" onClick={this.showHideSwitcher}>
+      <div
+        className="currency-switcher-container"
+        data-testid="currency-switcher"
+        onClick={ this.showHideSwitcher }
+      >
         <span> { currenciesObject[currency] } </span>
         <svg width="8" height="4" viewBox="0 0 8 4" fill="none" xmlns="http://www.w3.org/2000/svg" className="currency-switcher">
-          <path d="M1 0.5L4 3.5L7 0.5" stroke="black" strokeLinecap="round" strokeLinejoin="round"/>
+          <path
+            d="M1 0.5L4 3.5L7 0.5"
+            stroke="black"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
         </svg>
-        {this.state.showCurrencies ? this.renderCurrencySwitcher() : null}
+        { showCurrencies ? this.renderCurrencySwitcher() : null }
       </div>
-    )
+    );
   }
 }
 
@@ -64,5 +80,10 @@ const mapDispachToProps = (dispatch) => ({
 const mapStateToProps = (state) => ({
   currency: state.currencyReducer.currency,
 });
+
+CurrencySwitcher.propTypes = {
+  switchCurrencyAction: PropTypes.func.isRequired,
+  currency: PropTypes.string.isRequired,
+};
 
 export default connect(mapStateToProps, mapDispachToProps)(CurrencySwitcher);

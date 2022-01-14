@@ -120,19 +120,16 @@
   color: #1D1F22;
 }
 
-.attribute-option {
+.attribute-option  {
+  margin-left: 10px ;
   border: 1px solid #1D1F22;
   height: 45px;
   width: 63px;
   cursor: pointer;
   transition: all ease 0.2s;
-  font-family: Source Sans Pro;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 18px;
-  letter-spacing: 0.05em;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .attribute-option:hover, .attribute-option:focus {

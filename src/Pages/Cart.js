@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
-import CartProduct from '../Components/CartProduct'
-import Header from '../Components/Header'
+import CartProduct from '../Components/CartProduct';
+import Header from '../Components/Header';
 
-import '../Style/Cart.css'
+import '../Style/Cart.css';
 
 
 export default class Cart extends Component {
@@ -11,12 +11,12 @@ export default class Cart extends Component {
     return (
       <>
         <Header />
-          <main className="cart-main">
-            <article>
-              <h1 className="cart-title"> Cart </h1>
-            </article>
-            <CartProduct />
-          </main>
+        <main className="cart-main">
+          <article>
+            <h1 className="cart-title"> Cart </h1>
+          </article>
+          <CartProduct />
+        </main>
       </>
     );
   }

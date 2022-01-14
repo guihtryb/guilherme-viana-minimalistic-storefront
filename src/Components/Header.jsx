@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
-import '../Style/Header.css'
-import  NavLinks from  '../Components/NavLinks'
-import StoreLogo from './StoreLogo'
-import CurrencySwitcher from './CurrencySwitcher'
-import CartOverlay from './CartOverlay'
+import React, { Component } from 'react';
+import '../Style/Header.css';
+import  NavLinks from  '../Components/NavLinks';
+import StoreLogo from './StoreLogo';
+import CurrencySwitcher from './CurrencySwitcher';
+import CartOverlay from './CartOverlay';
 
 export default class Header extends Component {
   render() {
@@ -11,10 +11,10 @@ export default class Header extends Component {
       <header className="header-container">
         <NavLinks />
         <StoreLogo />
-          <div className="header-actions">
-            <CurrencySwitcher />
-            <CartOverlay />
-          </div>
+        <div className="header-actions">
+          <CurrencySwitcher />
+          <CartOverlay />
+        </div>
       </header>
     );
   }
